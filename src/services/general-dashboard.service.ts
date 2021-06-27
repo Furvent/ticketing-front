@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GeneralDashboardData } from 'src/shared/definitions/general-dashboard-data';
+import { GeneralDashboardData, UserData } from 'src/shared/definitions/common';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -7,10 +7,6 @@ import { ApiService } from './api.service';
 })
 export class GeneralDashboardService {
   private data: GeneralDashboardData = {
-    userId: 0,
-    userUsername: '',
-    userPseudo: '',
-    userCreationAccountDate: '',
     groupsData: [],
   };
 
@@ -22,7 +18,7 @@ export class GeneralDashboardService {
    */
   fetchData(userId: number): void {
     this.apiService
-      .getGeneralDashboardData(userId)
+      .getGeneralDashboardDataRequest(userId)
       .toPromise()
       .then((response) => {
         this.data = response;
@@ -31,20 +27,4 @@ export class GeneralDashboardService {
         console.error('Problem when fetch generalDashboardData', error);
       });
   }
-
-  getUserData(): UserData {
-    return {
-      userId: this.data.userId,
-      userUsername: this.data.userUsername,
-      userPseudo: this.data.userPseudo,
-      userCreationAccountDate: this.data.userCreationAccountDate,
-    };
-  }
 }
-
-type UserData = {
-  userId: number;
-  userUsername: string;
-  userPseudo: string;
-  userCreationAccountDate: string;
-};
