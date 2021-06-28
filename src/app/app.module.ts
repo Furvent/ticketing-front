@@ -15,6 +15,15 @@ import { GroupsListComponent } from './views/general-dashboard/groups-list/group
 import { ProfileComponent } from './views/general-dashboard/profile/profile.component';
 import { GroupDataComponent } from './views/general-dashboard/groups-list/group-data/group-data.component';
 import { ProfilEditionComponent } from './views/general-dashboard/profile/profil-edition/profil-edition.component';
+import { AllTicketsListComponent } from './views/group-dashboard/all-tickets-list/all-tickets-list.component';
+import { MyTicketsListComponent } from './views/group-dashboard/my-tickets-list/my-tickets-list.component';
+import { AdminOptionsComponent } from './views/group-dashboard/admin-options/admin-options.component';
+import { TicketDetailsComponent } from './views/group-dashboard/ticket-details/ticket-details.component';
+import { UpdateTicketComponent } from './views/group-dashboard/ticket-edition/update-ticket/update-ticket.component';
+import { AddTicketComponent } from './views/group-dashboard/ticket-edition/add-ticket/add-ticket.component';
+import { TicketEditionComponent } from './views/group-dashboard/ticket-edition/ticket-edition.component';
+import { AddUserGroupComponent } from './views/group-dashboard/admin-options/add-user-group/add-user-group.component';
+import { GenericDialogComponent } from './views/commons/generic-dialog/generic-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +37,16 @@ import { ProfilEditionComponent } from './views/general-dashboard/profile/profil
     GroupsListComponent,
     ProfileComponent,
     GroupDataComponent,
-    ProfilEditionComponent
+    ProfilEditionComponent,
+    AllTicketsListComponent,
+    MyTicketsListComponent,
+    AdminOptionsComponent,
+    TicketDetailsComponent,
+    UpdateTicketComponent,
+    AddTicketComponent,
+    TicketEditionComponent,
+    AddUserGroupComponent,
+    GenericDialogComponent
   ],
   imports: [
     BrowserModule,
