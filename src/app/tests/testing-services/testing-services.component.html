@@ -5,3 +5,11 @@
   <p>id :{{ userData.id }}</p>
   <p>creation account date: {{ userData.creationAccountDate }}</p>
 </div>
+
+<div *ngIf="groupsData.length > 0">
+  <div *ngFor="let group of groupsData">
+    <p>group-name : {{ group.name }}</p>
+    <p>id :{{ group.id }}</p>
+    <p>creator id :{{ group.creatorId }}</p>
+  </div>
+</div>

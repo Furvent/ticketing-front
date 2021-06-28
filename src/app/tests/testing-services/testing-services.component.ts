@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
 import { GeneralDashboardService } from 'src/services/general-dashboard/general-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
-import { LoginForm, NewUser, UpdatedUser, UserData } from 'src/shared/definitions/common';
+import {
+  GroupData,
+  LoginForm,
+  NewUser,
+  UpdatedUser,
+  UserData,
+} from 'src/shared/definitions/common';
 
 @Component({
   selector: 'app-testing-services',
@@ -26,9 +32,10 @@ export class TestingServicesComponent implements OnInit {
     oldPassword: 'pwdMimi',
     newPassword: 'haha',
     newPseudo: 'altMimi',
-  }
+  };
 
   userData: UserData | null = null;
+  groupsData: GroupData[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -37,8 +44,14 @@ export class TestingServicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.testUpdateUser();
+    this.testLogin();
     // this.testNewUser();
+    setTimeout(() => {
+      this.testGetGeneralDashboardData();
+      setTimeout(() => {
+        this.testAddGroup("test de group");
+      }, 500);
+    }, 500);
   }
 
   private testLogin(): void {
@@ -70,7 +83,29 @@ export class TestingServicesComponent implements OnInit {
         this.userData = this.userService.getUserData();
       })
       .catch((error) => {
-        console.error('Error is : ', error); // To see error details (here, Login already used)
+        console.error('Error is : ', error);
+      });
+  }
+
+  private testGetGeneralDashboardData(): void {
+    this.generalService
+      .fetchGeneralDashboardData()
+      .then((response) => {
+        this.groupsData = this.generalService.getGroupsData();
+      })
+      .catch((error) => {
+        console.error('Error is : ', error);
+      });
+  }
+
+  private testAddGroup(name: string): void {
+    this.generalService
+      .addGroup(name)
+      .then((response) => {
+        this.groupsData = this.generalService.getGroupsData();
+      })
+      .catch((error) => {
+        console.error('testAddGroup Error is : ', error);
       });
   }
 }

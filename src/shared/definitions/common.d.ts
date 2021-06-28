@@ -38,3 +38,8 @@ export type UpdatedUser = {
   oldPassword: string;
   newPseudo: string;
 }
+
+export type NewGroup = {
+  name: string;
+	creatorId: number;
+}
