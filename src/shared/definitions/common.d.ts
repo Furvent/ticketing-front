@@ -21,7 +21,7 @@ export type UserData = {
   creationAccountDate: string;
 };
 
-export type newUser = {
+export type NewUser = {
   username: string;
   password: string;
   pseudo: string;
@@ -30,4 +30,11 @@ export type newUser = {
 export type LoginForm = {
   username: string;
   password: string;
+}
+
+export type UpdatedUser = {
+  username: string;
+  newPassword: string;
+  oldPassword: string;
+  newPseudo: string;
 }

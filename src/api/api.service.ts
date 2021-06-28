@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GeneralDashboardData, LoginForm, newUser, UserData } from 'src/shared/definitions/common';
+import {
+  GeneralDashboardData,
+  LoginForm,
+  NewUser,
+  UpdatedUser,
+  UserData,
+} from 'src/shared/definitions/common';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +23,7 @@ export class ApiService {
     );
   }
 
-  public createUserRequest(newUser: newUser) {
+  public createUserRequest(newUser: NewUser) {
     return this.httpClient.post<UserData>(
       `${this.apiTicketingURL}/public/login/create-user`,
       newUser
@@ -28,6 +34,13 @@ export class ApiService {
     return this.httpClient.post<UserData>(
       `${this.apiTicketingURL}/public/login`,
       loginForm
+    );
+  }
+
+  public updateUserRequest(updatedUser: UpdatedUser) {
+    return this.httpClient.put<UserData>(
+      `${this.apiTicketingURL}/private/dashboard/updateUser`,
+      updatedUser
     );
   }
 }
