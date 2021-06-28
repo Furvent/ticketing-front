@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GeneralDashboardData, UserData } from 'src/shared/definitions/common';
-import { ApiService } from './api.service';
+import { ApiService } from 'src/api/api.service';
+import { GeneralDashboardData } from 'src/shared/definitions/common';
 
 @Injectable({
   providedIn: 'root',

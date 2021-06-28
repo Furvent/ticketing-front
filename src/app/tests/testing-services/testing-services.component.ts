@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/services/api.service';
-import { GeneralDashboardService } from 'src/services/general-dashboard.service';
+import { ApiService } from 'src/api/api.service';
+import { GeneralDashboardService } from 'src/services/general-dashboard/general-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { LoginForm, UserData } from 'src/shared/definitions/common';
 
