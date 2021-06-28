@@ -46,10 +46,17 @@ export class ApiService {
     );
   }
 
-  public addGroup(newGroupData: NewGroup) {
+  public addGroupRequest(newGroupData: NewGroup) {
     return this.httpClient.post<GroupData>(
       `${this.apiTicketingURL}/private/dashboard/addGroup`,
       newGroupData
+    );
+  }
+
+  public getGroupDashboardData(groupId: number) {
+    return this.httpClient.post<GeneralDashboardData>(
+      `${this.apiTicketingURL}/private/group`,
+      groupId
     );
   }
 }

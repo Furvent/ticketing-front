@@ -39,7 +39,7 @@ export class GeneralDashboardService {
     return new Promise((resolve, reject) => {
       const creatorId = this.userService.userData?.id;
       if (creatorId !== undefined) {
-        this.apiService.addGroup({ name, creatorId }).subscribe((response) => {
+        this.apiService.addGroupRequest({ name, creatorId }).subscribe((response) => {
           this.data.groupsData.push(response);
           resolve(true);
         }, (error) => {

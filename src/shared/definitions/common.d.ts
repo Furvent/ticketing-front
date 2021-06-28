@@ -2,6 +2,11 @@ export type GeneralDashboardData = {
   groupsData: GroupData[];
 }
 
+export type GroupDashboardData = {
+  groupData: GroupData;
+  ticketsData: TicketData[];
+}
+
 export type GroupData = {
   id: number;
   creatorId: number;
@@ -42,4 +47,17 @@ export type UpdatedUser = {
 export type NewGroup = {
   name: string;
 	creatorId: number;
+}
+
+export type TicketData = {
+  id: number;
+  title: string;
+  description: string;
+  history: StatusData[];
+  usersOnTask: PublicUser[];
+}
+
+export type StatusData = {
+  label: string;
+  date: string;
 }
