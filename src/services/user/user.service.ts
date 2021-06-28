@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginForm, UserData } from 'src/shared/definitions/common';
 import { ApiService } from '../api.service';

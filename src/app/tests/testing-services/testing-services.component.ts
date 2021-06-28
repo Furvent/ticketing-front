@@ -10,11 +10,10 @@ import { LoginForm, UserData } from 'src/shared/definitions/common';
   styleUrls: ['./testing-services.component.scss'],
 })
 export class TestingServicesComponent implements OnInit {
-
   mockedLoginForm: LoginForm = {
-    username: "mimi",
-    password: "pwdMimi",
-  }
+    username: 'mimi',
+    password: 'pwdMimi',
+  };
 
   userData: UserData | null = null;
 
@@ -25,11 +24,13 @@ export class TestingServicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.login(this.mockedLoginForm).then(response => {
-      console.log("this.userService.getUserData()", this.userService.getUserData())
-      this.userData = this.userService.getUserData();
-    }).catch(error => {
-      console.error("Error is : ", error);
-    })
+    this.userService
+      .login(this.mockedLoginForm)
+      .then((response) => {
+        this.userData = this.userService.getUserData();
+      })
+      .catch((error) => {
+        console.error('Error is : ', error);
+      });
   }
 }
