@@ -49,12 +49,27 @@ export type NewGroup = {
 	creatorId: number;
 }
 
+export type NewTicket = {
+  groupId: number;
+	title: string;
+  description: string;
+	usersOnTask: PublicUser[];
+}
+
 export type TicketData = {
   id: number;
   title: string;
   description: string;
   history: StatusData[];
   usersOnTask: PublicUser[];
+}
+
+export type UpdatedTicket = {
+  ticketId: number;
+	newTitle: string;
+  newDescription: string;
+  newStatus: string;
+	usersOnTask: PublicUser[];
 }
 
 export type StatusData = {

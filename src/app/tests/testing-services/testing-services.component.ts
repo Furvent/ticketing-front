@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
 import { GeneralDashboardService } from 'src/services/general-dashboard/general-dashboard.service';
+import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import {
+  GroupDashboardData,
   GroupData,
   LoginForm,
+  NewTicket,
   NewUser,
+  UpdatedTicket,
   UpdatedUser,
   UserData,
 } from 'src/shared/definitions/common';
@@ -16,6 +20,8 @@ import {
   styleUrls: ['./testing-services.component.scss'],
 })
 export class TestingServicesComponent implements OnInit {
+  mockedGroupId = 1;
+
   mockedLoginForm: LoginForm = {
     username: 'mimi',
     password: 'pwdMimi',
@@ -34,12 +40,28 @@ export class TestingServicesComponent implements OnInit {
     newPseudo: 'altMimi',
   };
 
+  mockedNewTicket: NewTicket = {
+    description: 'New cool description',
+    title: 'New cool title',
+    groupId: 1,
+    usersOnTask: [],
+  };
+
+  mockedUpdatedTicket: UpdatedTicket = {
+    newDescription: 'New cool description updated',
+    newTitle: 'New cool title updated',
+    ticketId: 1,
+    usersOnTask: [],
+    newStatus: '',
+  };
+
   userData: UserData | null = null;
   groupsData: GroupData[] = [];
+  groupDashboardData: GroupDashboardData | null = null;
 
   constructor(
-    private apiService: ApiService,
     private generalService: GeneralDashboardService,
+    private groupService: GroupDashboardService,
     private userService: UserService
   ) {}
 
@@ -47,9 +69,14 @@ export class TestingServicesComponent implements OnInit {
     this.testLogin();
     // this.testNewUser();
     setTimeout(() => {
-      this.testGetGeneralDashboardData();
+      // this.testGetGeneralDashboardData();
+      this.testGetGroupDashboardData(this.mockedGroupId);
       setTimeout(() => {
-        this.testAddGroup("test de group");
+        // this.testAddGroup('test de group');
+        this.testUpdateTicket(this.mockedUpdatedTicket);
+        setTimeout(() => {
+          console.log('groupDashboardData', this.groupDashboardData);
+        }, 500);
       }, 500);
     }, 500);
   }
@@ -106,6 +133,43 @@ export class TestingServicesComponent implements OnInit {
       })
       .catch((error) => {
         console.error('testAddGroup Error is : ', error);
+      });
+  }
+
+  private testGetGroupDashboardData(groupId: number) {
+    this.groupService
+      .fetchGroupDashboardData(groupId)
+      .then(() => {
+        this.groupDashboardData = this.groupService.getGroupDashboardData();
+      })
+      .catch((error) => {
+        console.error('testGetGroupDashboardData Error is : ', error);
+      });
+  }
+
+  private testAddTicket(newTicket: NewTicket) {
+    this.groupService
+      .addTicket(newTicket)
+      .then(() => {
+        this.groupDashboardData = this.groupService.getGroupDashboardData();
+      })
+      .catch((error) => {
+        console.error('testGetGroupDashboardData Error is : ', error);
+      });
+  }
+
+  private testUpdateTicket(updatedTicket: UpdatedTicket) {
+    this.groupService
+      .updateTicket(updatedTicket)
+      .then(() => {
+        this.groupService
+          .fetchGroupDashboardData(this.mockedGroupId)
+          .then(() => {
+            this.groupDashboardData = this.groupService.getGroupDashboardData();
+          });
+      })
+      .catch((error) => {
+        console.error('testGetGroupDashboardData Error is : ', error);
       });
   }
 }

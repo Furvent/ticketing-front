@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   GeneralDashboardData,
+  GroupDashboardData,
   GroupData,
   LoginForm,
   NewGroup,
+  NewTicket,
   NewUser,
+  TicketData,
+  UpdatedTicket,
   UpdatedUser,
   UserData,
 } from 'src/shared/definitions/common';
@@ -53,10 +57,24 @@ export class ApiService {
     );
   }
 
-  public getGroupDashboardData(groupId: number) {
-    return this.httpClient.post<GeneralDashboardData>(
+  public getGroupDashboardDataRequest(groupId: number) {
+    return this.httpClient.post<GroupDashboardData>(
       `${this.apiTicketingURL}/private/group`,
       groupId
+    );
+  }
+
+  public addTicketRequest(newTicket: NewTicket) {
+    return this.httpClient.post<TicketData>(
+      `${this.apiTicketingURL}/private/group/add-ticket`,
+      newTicket
+    );
+  }
+
+  public updateTicketRequest(updatedTicket: UpdatedTicket) {
+    return this.httpClient.post(
+      `${this.apiTicketingURL}/private/group/update-ticket`,
+      updatedTicket
     );
   }
 }
