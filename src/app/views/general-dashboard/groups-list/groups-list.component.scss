@@ -1,5 +1,6 @@
 .ticketing-main-container-group-lists {
-  width: 600px;
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin: auto;
 }
 
@@ -7,5 +8,17 @@
   display: flex;
   justify-content: space-between;
   padding-left: 2rem;
-  padding-right: 4rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+}
+
+table {
+  width: 100%;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.mat-header-cell {
+  text-align: center;
 }
