@@ -7,6 +7,7 @@ import {
   GroupDashboardData,
   GroupData,
   LoginForm,
+  NewComment,
   NewTicket,
   NewUser,
   UpdatedTicket,
@@ -55,6 +56,20 @@ export class TestingServicesComponent implements OnInit {
     newStatus: '',
   };
 
+  mockedNewCommentOnTicket: NewComment = {
+    author: "Furvent",
+    text: "A new comment on a ticket",
+    entityId: 2,
+    entityType: "TICKET",
+  }
+
+  mockedNewCommentOnGroup: NewComment = {
+    author: "Furvent",
+    text: "A new comment on a group",
+    entityId: 1,
+    entityType: "GROUP",
+  }
+
   userData: UserData | null = null;
   groupsData: GroupData[] = [];
   groupDashboardData: GroupDashboardData | null = null;
@@ -73,7 +88,9 @@ export class TestingServicesComponent implements OnInit {
       this.testGetGroupDashboardData(this.mockedGroupId);
       setTimeout(() => {
         // this.testAddGroup('test de group');
-        this.testUpdateTicket(this.mockedUpdatedTicket);
+        // this.testUpdateTicket(this.mockedUpdatedTicket);
+      this.testAddCommentOnTicket(this.mockedNewCommentOnTicket);
+      this.testAddCommentOnGroup(this.mockedNewCommentOnGroup);
         setTimeout(() => {
           console.log('groupDashboardData', this.groupDashboardData);
         }, 500);
@@ -170,6 +187,36 @@ export class TestingServicesComponent implements OnInit {
       })
       .catch((error) => {
         console.error('testGetGroupDashboardData Error is : ', error);
+      });
+  }
+
+  private testAddCommentOnTicket(newComment: NewComment) {
+    this.groupService
+      .addCommentOnTicket(newComment)
+      .then(() => {
+        this.groupService
+          .fetchGroupDashboardData(this.mockedGroupId)
+          .then(() => {
+            this.groupDashboardData = this.groupService.getGroupDashboardData();
+          });
+      })
+      .catch((error) => {
+        console.error('testAddCommentOnTicket Error is : ', error);
+      });
+  }
+
+  private testAddCommentOnGroup(newComment: NewComment) {
+    this.groupService
+      .addCommentOnGroup(newComment)
+      .then(() => {
+        this.groupService
+          .fetchGroupDashboardData(this.mockedGroupId)
+          .then(() => {
+            this.groupDashboardData = this.groupService.getGroupDashboardData();
+          });
+      })
+      .catch((error) => {
+        console.error('testAddCommentOnGroup Error is : ', error);
       });
   }
 }

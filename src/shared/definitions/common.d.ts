@@ -5,6 +5,7 @@ export type GeneralDashboardData = {
 export type GroupDashboardData = {
   groupData: GroupData;
   ticketsData: TicketData[];
+  commentsToDisplay: Comment[];
 }
 
 export type GroupData = {
@@ -62,6 +63,7 @@ export type TicketData = {
   description: string;
   history: StatusData[];
   usersOnTask: PublicUser[];
+  commentsToDisplay: Comment[];
 }
 
 export type UpdatedTicket = {
@@ -75,4 +77,17 @@ export type UpdatedTicket = {
 export type StatusData = {
   label: string;
   date: string;
+}
+
+export type NewComment = {
+  entityId: number;
+	entityType: string;
+  text: string;
+  author: string;
+}
+
+export type Comment = {
+  text: string;
+  author: string;
+	creationDate: string;
 }

@@ -5,6 +5,7 @@ import {
   GroupDashboardData,
   GroupData,
   LoginForm,
+  NewComment,
   NewGroup,
   NewTicket,
   NewUser,
@@ -75,6 +76,20 @@ export class ApiService {
     return this.httpClient.post(
       `${this.apiTicketingURL}/private/group/update-ticket`,
       updatedTicket
+    );
+  }
+
+  public addTicketCommentRequest(newComment: NewComment) {
+    return this.httpClient.post(
+      `${this.apiTicketingURL}/comment/createTicket`,
+      newComment
+    );
+  }
+
+  public addGroupCommentRequest(newComment: NewComment) {
+    return this.httpClient.post(
+      `${this.apiTicketingURL}/comment/createGroup`,
+      newComment
     );
   }
 }
