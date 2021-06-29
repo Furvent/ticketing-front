@@ -25,9 +25,10 @@ import { TicketEditionComponent } from './views/group-dashboard/ticket-edition/t
 import { AddUserGroupComponent } from './views/group-dashboard/admin-options/add-user-group/add-user-group.component';
 import { GenericDialogComponent } from './views/commons/generic-dialog/generic-dialog.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule } from '@angular/material/form-field/';
+import { MatInputModule } from '@angular/material/input';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-import {FormBuilder} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @NgModule({
@@ -60,10 +61,11 @@ import {FormBuilder} from '@angular/forms';
     HttpClientModule,
     MatCardModule,
     MatFormFieldModule,
-    FormBuilder,
+    MatInputModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill', floatLabel: 'always'}},
+    FormBuilder
   ],
   bootstrap: [AppComponent],
 })
