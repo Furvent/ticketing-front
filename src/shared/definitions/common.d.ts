@@ -13,6 +13,7 @@ export type GroupData = {
   creatorId: number;
   name: string;
   users: PublicUser[];
+  creationDateGroup: string;
 }
 
 export type PublicUser = {

@@ -13,7 +13,6 @@ import { SignInComponent } from './views/connection/sign-in/sign-in.component';
 import { SignUpComponent } from './views/connection/sign-up/sign-up.component';
 import { GroupsListComponent } from './views/general-dashboard/groups-list/groups-list.component';
 import { ProfileComponent } from './views/general-dashboard/profile/profile.component';
-import { GroupDataComponent } from './views/general-dashboard/groups-list/group-data/group-data.component';
 import { ProfilEditionComponent } from './views/general-dashboard/profile/profil-edition/profil-edition.component';
 import { AllTicketsListComponent } from './views/group-dashboard/all-tickets-list/all-tickets-list.component';
 import { MyTicketsListComponent } from './views/group-dashboard/my-tickets-list/my-tickets-list.component';
@@ -23,7 +22,6 @@ import { UpdateTicketComponent } from './views/group-dashboard/ticket-edition/up
 import { AddTicketComponent } from './views/group-dashboard/ticket-edition/add-ticket/add-ticket.component';
 import { TicketEditionComponent } from './views/group-dashboard/ticket-edition/ticket-edition.component';
 import { AddUserGroupComponent } from './views/group-dashboard/admin-options/add-user-group/add-user-group.component';
-import { GenericDialogComponent } from './views/commons/generic-dialog/generic-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field/';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +30,9 @@ import { FormBuilder } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreateGroupComponent } from './views/general-dashboard/groups-list/create-group/create-group.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,6 @@ import { MatButtonModule } from '@angular/material/button';
     SignUpComponent,
     GroupsListComponent,
     ProfileComponent,
-    GroupDataComponent,
     ProfilEditionComponent,
     AllTicketsListComponent,
     MyTicketsListComponent,
@@ -54,7 +54,7 @@ import { MatButtonModule } from '@angular/material/button';
     AddTicketComponent,
     TicketEditionComponent,
     AddUserGroupComponent,
-    GenericDialogComponent,
+    CreateGroupComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +67,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTabsModule,
     MatProgressBarModule,
     MatButtonModule,
+    MatTableModule,
+    MatDialogModule,
   ],
   providers: [
     {
