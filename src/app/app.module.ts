@@ -24,6 +24,7 @@ import { AddTicketComponent } from './views/group-dashboard/ticket-edition/add-t
 import { TicketEditionComponent } from './views/group-dashboard/ticket-edition/ticket-edition.component';
 import { AddUserGroupComponent } from './views/group-dashboard/admin-options/add-user-group/add-user-group.component';
 import { GenericDialogComponent } from './views/commons/generic-dialog/generic-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -46,15 +47,16 @@ import { GenericDialogComponent } from './views/commons/generic-dialog/generic-d
     AddTicketComponent,
     TicketEditionComponent,
     AddUserGroupComponent,
-    GenericDialogComponent
+    GenericDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
