@@ -13,3 +13,36 @@
     <p>creator id :{{ group.creatorId }}</p>
   </div>
 </div>
+
+<div *ngIf="groupDashboardData != null">
+  <div>
+    <h1>Group data</h1>
+    <p>group-name : {{ groupDashboardData.groupData.name }}</p>
+    <p>id :{{ groupDashboardData.groupData.id }}</p>
+    <p>creator id :{{ groupDashboardData.groupData.creatorId }}</p>
+    <h4>Comments</h4>
+    <ul>
+      <li *ngFor="let comment of groupDashboardData.commentsToDisplay">
+        <span>Text: {{comment.text}} </span> -- author: <span> {{comment.author}} </span>
+      </li>
+    </ul>
+    <h1>Tickets</h1>
+    <div *ngFor="let ticket of groupDashboardData.ticketsData">
+      <h2>-- {{ticket.title}} --</h2>
+      <p>description: {{ticket.description}} </p>
+      <p>id: {{ticket.id}} </p>
+      <h3>History</h3>
+      <ul>
+        <li *ngFor="let statusData of ticket.history" >
+          <span>label: {{statusData.label}} </span> -- date: <span> {{statusData.date | date}} </span>
+        </li>
+      </ul>
+      <h3>Comments</h3>
+      <ul>
+        <li *ngFor="let comment of ticket.commentsToDisplay" >
+          <span>Text: {{comment.text}} </span> -- author: <span> {{comment.author}} </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

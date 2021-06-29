@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
-import { GroupDashboardData, NewTicket, UpdatedTicket } from 'src/shared/definitions/common';
+import { GroupDashboardData, NewComment, NewTicket, UpdatedTicket } from 'src/shared/definitions/common';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +51,42 @@ export class GroupDashboardService {
     });
   }
 
+  addCommentOnTicket(newComment: NewComment) {
+    return new Promise((resolve, reject) => {
+      this.apiService.addTicketCommentRequest(newComment).subscribe(
+        () => {
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  addCommentOnGroup(newComment: NewComment) {
+    return new Promise((resolve, reject) => {
+      this.apiService.addGroupCommentRequest(newComment).subscribe(
+        () => {
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  /**
+   * Sort tickets history before sending back data
+   * @returns Data used to display a group's dashboard
+   */
   getGroupDashboardData() {
+    this.data?.ticketsData.forEach(ticket => {
+      ticket.history.sort((statusA, statusB) => {
+        return (new Date(statusA.date).getTime()) - (new Date(statusB.date).getTime());
+      })
+    })
     return this.data;
   }
 }
