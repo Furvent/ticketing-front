@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/services/user/user.service';
+import { LoginForm } from 'src/shared/definitions/common';
 
 @Component({
   selector: 'app-general-dashboard',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralDashboardComponent implements OnInit {
 
-  constructor() { }
+  private mockedUserLoginForm: LoginForm = {
+    username: "mimi",
+    password: "pwdMimi",
+  }
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    
   }
 
 }
