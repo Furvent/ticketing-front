@@ -25,11 +25,13 @@ import { TicketEditionComponent } from './views/group-dashboard/ticket-edition/t
 import { AddUserGroupComponent } from './views/group-dashboard/admin-options/add-user-group/add-user-group.component';
 import { GenericDialogComponent } from './views/commons/generic-dialog/generic-dialog.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatFormFieldModule } from '@angular/material/form-field/';
+import { MatFormFieldModule } from '@angular/material/form-field/';
 import { MatInputModule } from '@angular/material/input';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { FormBuilder } from '@angular/forms';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -61,11 +63,17 @@ import { FormBuilder } from '@angular/forms';
     HttpClientModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatProgressBarModule,
+    MatButtonModule,
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill', floatLabel: 'always'}},
-    FormBuilder
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill', floatLabel: 'always' },
+    },
+    FormBuilder,
   ],
   bootstrap: [AppComponent],
 })

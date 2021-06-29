@@ -18,7 +18,7 @@ export class GeneralDashboardService {
 
   fetchGeneralDashboardData() {
     return new Promise((resolve, reject) => {
-      const userId = this.userService.userData?.id;
+      const userId = this.userService.getUserData().id;
       if (userId !== undefined) {
         this.apiService.getGeneralDashboardDataRequest(userId).subscribe(
           (response) => {
@@ -37,7 +37,7 @@ export class GeneralDashboardService {
 
   addGroup(name: string) {
     return new Promise((resolve, reject) => {
-      const creatorId = this.userService.userData?.id;
+      const creatorId = this.userService.getUserData().id;
       if (creatorId !== undefined) {
         this.apiService.addGroupRequest({ name, creatorId }).subscribe((response) => {
           this.data.groupsData.push(response);
@@ -52,6 +52,6 @@ export class GeneralDashboardService {
   }
 
   getGroupsData() {
-    return this.data.groupsData;
+    return this.data;
   }
 }
