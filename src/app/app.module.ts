@@ -33,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreateGroupComponent } from './views/general-dashboard/groups-list/create-group/create-group.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CreateGroupComponent } from './views/general-dashboard/groups-list/crea
     MatButtonModule,
     MatTableModule,
     MatDialogModule,
+    FormsModule,
   ],
   providers: [
     {

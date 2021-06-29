@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GeneralDashboardService } from 'src/services/general-dashboard/general-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { GroupData } from 'src/shared/definitions/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateGroupComponent } from './create-group/create-group.component';
 
 @Component({
   selector: 'app-groups-list',
@@ -13,7 +15,11 @@ export class GroupsListComponent implements OnInit {
   groupsListData: GroupData[] = [];
   displayedColumns: string[] = ['name', 'creator', 'creationDate', 'button'];
 
-  constructor(private gdService: GeneralDashboardService, private userService: UserService) {
+  constructor(
+    private gdService: GeneralDashboardService,
+    private userService: UserService,
+    private dialog: MatDialog,
+  ) {
     this.userPseudo = this.userService.getUserData().pseudo;
   }
 
@@ -21,19 +27,34 @@ export class GroupsListComponent implements OnInit {
     this.groupsListData = this.gdService.getGroupsData().groupsData;
   }
 
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true; // To put autocus on first input field
+    dialogConfig.data = {
+      name: "test name y",
+    }
+    const dialogRef = this.dialog.open(CreateGroupComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+      console.log("response dialog", data);
+    })
+  }
+
   getCreatorPseudoFromGroupData(groupData: GroupData) {
     const creatorGroupId = groupData.creatorId;
-    const pseudo = groupData.users.find(user => {
+    const pseudo = groupData.users.find((user) => {
       return user.id === creatorGroupId;
-    })?.pseudo
-    return pseudo === this.userPseudo ? 'Yourself' : pseudo
+    })?.pseudo;
+    return pseudo === this.userPseudo ? 'Yourself' : pseudo;
   }
 
   enterGroup(groupId: number) {
-    console.log("groupId", groupId);
+    console.log('groupId', groupId);
   }
 
-  createNewGroup() {
-    this.gdService.addGroup("")
+  openCreateGroupModal() {
+    // this.gdService.addGroup('');
+    this.openDialog();
+
   }
 }
