@@ -11,11 +11,16 @@ import {
   providedIn: 'root',
 })
 export class UserService {
-  userData: UserData | null = null;
+  private userData: UserData = {
+    id: 0,
+    pseudo: "",
+    username: "",
+    creationAccountDate: "",
+  }
 
   constructor(private apiService: ApiService) {}
 
-  login(loginForm: LoginForm): Promise<boolean> {
+  async login(loginForm: LoginForm): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.apiService.loginRequest(loginForm).subscribe(
         (response) => {

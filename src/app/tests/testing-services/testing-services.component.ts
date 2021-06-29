@@ -135,7 +135,7 @@ export class TestingServicesComponent implements OnInit {
     this.generalService
       .fetchGeneralDashboardData()
       .then((response) => {
-        this.groupsData = this.generalService.getGroupsData();
+        this.groupsData = this.generalService.getGroupsData().groupsData;
       })
       .catch((error) => {
         console.error('Error is : ', error);
@@ -146,7 +146,7 @@ export class TestingServicesComponent implements OnInit {
     this.generalService
       .addGroup(name)
       .then((response) => {
-        this.groupsData = this.generalService.getGroupsData();
+        this.groupsData = this.generalService.getGroupsData().groupsData;
       })
       .catch((error) => {
         console.error('testAddGroup Error is : ', error);
