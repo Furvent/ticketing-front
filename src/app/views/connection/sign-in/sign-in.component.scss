@@ -1,0 +1,25 @@
+
+.ticketing-signin-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ticketing-signin-button-container {
+}
+
+.ticketing-signin-button button,
+.ticketing-signin-button a {
+    margin-right: 8px;
+    display: flex;
+    align-content: center;
+}
+
+.ticketing-signin-inputfield-name {
+    width:100%;
+}
+
+.ticketing-signin-inputfield-password {
+    margin-top: 5px;
+    width:100%;
+}

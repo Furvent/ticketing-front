@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
+  Username: string = "";
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSelect(signIn): void{
+
   }
 
 }
