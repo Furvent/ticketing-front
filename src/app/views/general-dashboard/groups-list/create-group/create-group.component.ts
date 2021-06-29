@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CreateGroupComponent implements OnInit {
 
-  name: any;
+  name: string;
 
   constructor(
     private dialogRef: MatDialogRef<CreateGroupComponent>,

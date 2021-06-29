@@ -34,6 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreateGroupComponent } from './views/general-dashboard/groups-list/create-group/create-group.component';
 import { FormsModule } from '@angular/forms';
+import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-ticket-details.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FormsModule } from '@angular/forms';
     TicketEditionComponent,
     AddUserGroupComponent,
     CreateGroupComponent,
+    TestTicketDetailsComponent,
   ],
   imports: [
     BrowserModule,

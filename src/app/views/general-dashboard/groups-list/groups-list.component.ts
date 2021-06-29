@@ -18,7 +18,7 @@ export class GroupsListComponent implements OnInit {
   constructor(
     private gdService: GeneralDashboardService,
     private userService: UserService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
     this.userPseudo = this.userService.getUserData().pseudo;
   }
@@ -32,12 +32,14 @@ export class GroupsListComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true; // To put autocus on first input field
     dialogConfig.data = {
-      name: "test name y",
-    }
+      name: '',
+    };
     const dialogRef = this.dialog.open(CreateGroupComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data => {
-      console.log("response dialog", data);
-    })
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data !== undefined) {
+        this.createNewGroup(data)
+      }
+    });
   }
 
   getCreatorPseudoFromGroupData(groupData: GroupData) {
@@ -53,8 +55,14 @@ export class GroupsListComponent implements OnInit {
   }
 
   openCreateGroupModal() {
-    // this.gdService.addGroup('');
     this.openDialog();
+  }
 
+  createNewGroup(newGroupName: string) {
+    console.log("newGroupName", newGroupName)
+    this.gdService.addGroup(newGroupName).then(() => {
+      const newData: GroupData[] = []
+      this.groupsListData = newData.concat(this.gdService.getGroupsData().groupsData);
+    })
   }
 }
