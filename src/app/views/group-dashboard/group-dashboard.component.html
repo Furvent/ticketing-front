@@ -1,1 +1,16 @@
-<p>group-dashboard works!</p>
+<div class="ticketing-group-dashboard-container">
+  <mat-progress-bar
+    *ngIf="isLoadingData"
+    mode="indeterminate"
+    class="ticketing-group-dashboard-progress-bar"
+  ></mat-progress-bar>
+  <mat-tab-group
+    *ngIf="!isLoadingData"
+    mat-align-tabs="center"
+    class="mat-elevation-z1"
+  >
+    <mat-tab label="All tickets"> <app-all-tickets-list></app-all-tickets-list> </mat-tab>
+    <mat-tab label="My tickets"> <app-my-tickets-list></app-my-tickets-list> </mat-tab>
+    <mat-tab label="Group options"> <app-admin-options></app-admin-options> </mat-tab>
+  </mat-tab-group>
+</div>
