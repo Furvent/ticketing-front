@@ -15,6 +15,7 @@ export class GroupDashboardService {
       this.apiService.getGroupDashboardDataRequest(groupId).subscribe(
         (response) => {
           this.data = response;
+          this.sortTicketHistory();
           resolve(true);
         },
         (error) => {
@@ -82,11 +83,29 @@ export class GroupDashboardService {
    * @returns Data used to display a group's dashboard
    */
   getGroupDashboardData() {
-    this.data?.ticketsData.forEach(ticket => {
-      ticket.history.sort((statusA, statusB) => {
-        return (new Date(statusA.date).getTime()) - (new Date(statusB.date).getTime());
-      })
-    })
+    // this.data?.ticketsData.forEach(ticket => {
+    //   ticket.history.sort((statusA, statusB) => {
+    //     return (new Date(statusA.date).getTime()) - (new Date(statusB.date).getTime());
+    //   })
+    // })
     return this.data;
+  }
+
+  getAllTickets() {
+    if (this.data && this.data.ticketsData.length > 0) {
+      return this.data.ticketsData;
+    } else {
+      return [];
+    }
+  }
+
+  private sortTicketHistory() {
+    if (this.data && this.data.ticketsData.length > 0) {
+      this.data.ticketsData.forEach(ticket => {
+        ticket.history.sort((statusA, statusB) => {
+          return (new Date(statusA.date).getTime()) - (new Date(statusB.date).getTime());
+        })
+      })
+    }
   }
 }
