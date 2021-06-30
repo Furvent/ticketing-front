@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { TicketData, UpdatedTicket } from 'src/shared/definitions/common';
@@ -25,6 +25,8 @@ export class AllTicketsListComponent implements OnInit {
   closedTickets: TicketData[] = [];
 
   ticketStatusLabels: string[];
+
+  @Output() refresh = new EventEmitter();
 
   constructor(
     private groupService: GroupDashboardService,
@@ -104,6 +106,7 @@ export class AllTicketsListComponent implements OnInit {
       this.groupService.fetchGroupDashboardData(this.groupId).then(() => {
         this.allTickets = this.groupService.getAllTickets();
         this.sortTicketsByLastStatus();
+        this.refresh.emit();
       })
     })
   }

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
-import { GroupDashboardData, NewComment, NewTicket, UpdatedTicket } from 'src/shared/definitions/common';
+import {
+  GroupDashboardData,
+  NewComment,
+  NewTicket,
+  UpdatedTicket,
+} from 'src/shared/definitions/common';
 
 @Injectable({
   providedIn: 'root',
@@ -107,13 +112,25 @@ export class GroupDashboardService {
     }
   }
 
+  getAllTicketsWithUserId(userId: number) {
+    if (this.data && this.data.ticketsData.length > 0) {
+      return this.data.ticketsData.filter((ticket) =>
+        ticket.usersOnTask.find((user) => (user.id === userId))
+      );
+    } else {
+      return [];
+    }
+  }
+
   private sortTicketHistory() {
     if (this.data && this.data.ticketsData.length > 0) {
-      this.data.ticketsData.forEach(ticket => {
+      this.data.ticketsData.forEach((ticket) => {
         ticket.history.sort((statusA, statusB) => {
-          return (new Date(statusA.date).getTime()) - (new Date(statusB.date).getTime());
-        })
-      })
+          return (
+            new Date(statusA.date).getTime() - new Date(statusB.date).getTime()
+          );
+        });
+      });
     }
   }
 }

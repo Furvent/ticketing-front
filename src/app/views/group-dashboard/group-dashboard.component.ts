@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { LoginForm } from 'src/shared/definitions/common';
+import { MyTicketsListComponent } from './my-tickets-list/my-tickets-list.component';
 
 @Component({
   selector: 'app-group-dashboard',
@@ -9,6 +10,9 @@ import { LoginForm } from 'src/shared/definitions/common';
   styleUrls: ['./group-dashboard.component.scss']
 })
 export class GroupDashboardComponent implements OnInit {
+
+  @ViewChild(MyTicketsListComponent)
+  private myTicketsComponent!: MyTicketsListComponent;
 
   private mockedUserLoginForm: LoginForm = {
     username: 'mimi',
@@ -27,6 +31,11 @@ export class GroupDashboardComponent implements OnInit {
         this.isLoadingData = false;
       });
     });
+  }
+
+  // Temporary, will change with Observable
+  refreshMyTickets() {
+    this.myTicketsComponent.getMyTickets();
   }
 
 }
