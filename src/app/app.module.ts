@@ -36,6 +36,7 @@ import { CreateGroupComponent } from './views/general-dashboard/groups-list/crea
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-ticket-details.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatRadioModule,
   ],
   providers: [
     {

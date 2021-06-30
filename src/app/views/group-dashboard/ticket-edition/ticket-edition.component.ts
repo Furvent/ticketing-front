@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PublicUser, TicketData } from 'src/shared/definitions/common';
+import { NewTicket, PublicUser, TicketData, UpdatedTicket } from 'src/shared/definitions/common';
+import { TicketStatus } from 'src/shared/enums/ticket-status';
 
 @Component({
   selector: 'app-ticket-edition',
@@ -9,20 +10,26 @@ import { PublicUser, TicketData } from 'src/shared/definitions/common';
   styleUrls: ['./ticket-edition.component.scss'],
 })
 export class TicketEditionComponent implements OnInit {
+  data:TicketEditionData;
   ticket: TicketData;
   isNewTicket: boolean;
   groupUserPseudoSelectOptions: String[];
   pseudosSelected: FormControl;
+  selectedStatus: string;
+  selectableStatus: String[];
 
   constructor(
     private dialogRef: MatDialogRef<TicketEditionComponent>,
     @Inject(MAT_DIALOG_DATA) data: TicketEditionData
   ) {
+    this.data = data;
     this.ticket = data.ticket;
     // To use multiple select with angular material, we must use directly a string, not a object
     this.groupUserPseudoSelectOptions = data.groupUsers.map((user) => user.pseudo);
     this.isNewTicket = data.isNewTicket;
     this.pseudosSelected = new FormControl();
+    this.selectableStatus = [TicketStatus.DONE, TicketStatus.CLOSED];
+    this.selectedStatus = this.getPreSelectedStatus();
   }
 
   ngOnInit(): void {
@@ -32,15 +39,38 @@ export class TicketEditionComponent implements OnInit {
   }
 
   submit() {
-    this.dialogRef.close(new TicketEditionData(this.ticket, this.isNewTicket));
+    if (this.isNewTicket) {
+
+    } else {
+      const updatedTicket: UpdatedTicket = {
+        ticketId: this.ticket.id,
+        newTitle: this.ticket.title,
+        newDescription: this.ticket.description,
+        newStatus: this.selectedStatus,
+        usersOnTask: this.getSelectedUser(),
+      }
+      this.dialogRef.close(new TicketAfterEditionData(updatedTicket, undefined));
+    }
   }
 
-  cancel() {
+  goBack() {
     this.dialogRef.close();
   }
 
   test() {
     console.log('this.pseudosSelected', this.pseudosSelected.value);
+    console.log("this.selectedStatus", this.selectedStatus);
+  }
+
+  getPreSelectedStatus() {
+    const statusLabel = this.ticket.history[this.ticket.history.length - 1].label;
+    return (statusLabel === TicketStatus.DONE || statusLabel === TicketStatus.CLOSED) ? statusLabel : "";
+  }
+
+  getSelectedUser() {
+    return this.data.groupUsers.filter(user => {
+      return this.pseudosSelected.value.find((pseudo: string) => user.pseudo === pseudo);
+    })
   }
 }
 
@@ -64,3 +94,16 @@ export class TicketEditionData {
     this.groupUsers = groupUsers;
   }
 }
+
+export class TicketAfterEditionData {
+  updatedTicket: UpdatedTicket | undefined;
+  newTicket: NewTicket | undefined;
+  constructor(
+    updatedTicket: UpdatedTicket | undefined,
+    newTicket: NewTicket | undefined
+  ) {
+    this.updatedTicket = updatedTicket;
+    this.newTicket = newTicket;
+  }
+}
+

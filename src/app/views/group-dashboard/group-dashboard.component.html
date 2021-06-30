@@ -9,7 +9,7 @@
     mat-align-tabs="center"
     class="mat-elevation-z1"
   >
-    <mat-tab label="All tickets"> <app-all-tickets-list></app-all-tickets-list> </mat-tab>
+    <mat-tab label="All tickets"> <app-all-tickets-list [groupId]="mockedGroupId"></app-all-tickets-list> </mat-tab>
     <mat-tab label="My tickets"> <app-my-tickets-list></app-my-tickets-list> </mat-tab>
     <mat-tab label="Group options"> <app-admin-options></app-admin-options> </mat-tab>
   </mat-tab-group>

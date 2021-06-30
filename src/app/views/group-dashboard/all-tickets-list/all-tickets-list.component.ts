@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
-import { TicketData } from 'src/shared/definitions/common';
+import { TicketData, UpdatedTicket } from 'src/shared/definitions/common';
 import { getAllStatus, TicketStatus } from 'src/shared/enums/ticket-status';
 import {
+  TicketAfterEditionData,
   TicketEditionComponent,
   TicketEditionData,
 } from '../ticket-edition/ticket-edition.component';
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-all-tickets-list',
@@ -14,6 +16,7 @@ import {
   styleUrls: ['./all-tickets-list.component.scss'],
 })
 export class AllTicketsListComponent implements OnInit {
+  @Input() groupId = 1;
   allTickets: TicketData[] = [];
 
   openedTickets: TicketData[] = [];
@@ -73,16 +76,35 @@ export class AllTicketsListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true; // To put autocus on first input field
+    const tempTicket = cloneDeep(ticket);
     dialogConfig.data = new TicketEditionData(
-      ticket,
+      tempTicket,
       false,
       this.groupService.getAllGroupUsers(),
     );
     const dialogRef = this.dialog.open(TicketEditionComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((data: TicketEditionData) => {
+    dialogRef.afterClosed().subscribe((data: TicketAfterEditionData) => {
       if (data !== undefined) {
         // Call service to update ticket or create ticket
+        if (data.newTicket) {
+
+        } else if (data.updatedTicket) {
+          // Call service to update ticket
+          this.updateTicket(data.updatedTicket);
+        }
       }
     });
+  }
+
+  /**
+   * Refresh is temporary, will changes when using Observable
+   */
+  updateTicket(updatedTicket: UpdatedTicket) {
+    this.groupService.updateTicket(updatedTicket).then(() => {
+      this.groupService.fetchGroupDashboardData(this.groupId).then(() => {
+        this.allTickets = this.groupService.getAllTickets();
+        this.sortTicketsByLastStatus();
+      })
+    })
   }
 }

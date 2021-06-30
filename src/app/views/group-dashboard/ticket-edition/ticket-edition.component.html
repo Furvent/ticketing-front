@@ -1,20 +1,43 @@
 <div class="ticketing-ticket-edition-main-container">
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's title</mat-label>
-    <input type="text" matInput [(ngModel)]="ticket.title"/>
+    <input type="text" matInput [(ngModel)]="ticket.title" />
   </mat-form-field>
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's description</mat-label>
     <textarea matInput [(ngModel)]="ticket.description"></textarea>
   </mat-form-field>
-  <div class="ticketing-ticket-edition-users-container">
+  <div>
     <h3>Add user(s) on task</h3>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="ticketing-ticket-edition-input">
       <mat-label>Users available</mat-label>
       <mat-select [formControl]="pseudosSelected" multiple>
-        <mat-option *ngFor="let pseudo of groupUserPseudoSelectOptions" [value]="pseudo">{{pseudo}}</mat-option>
+        <mat-option
+          *ngFor="let pseudo of groupUserPseudoSelectOptions"
+          [value]="pseudo"
+          >{{ pseudo }}</mat-option
+        >
       </mat-select>
     </mat-form-field>
-    <button class="mat-raised-button" (click)="test()">test</button>
+  </div>
+  <div *ngIf="!isNewTicket">
+    <h3>Change status</h3>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="ticketing-ticket-edition-radio-group"
+      [(ngModel)]="selectedStatus"
+    >
+      <mat-radio-button
+        class="ticketing-ticket-edition-radio-button"
+        *ngFor="let status of selectableStatus"
+        [value]="status"
+      >
+        {{ status }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="ticket-ticket-edition-buttons-container">
+    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    <button mat-raised-button color="warn" (click)="goBack()">Go back</button>
   </div>
 </div>

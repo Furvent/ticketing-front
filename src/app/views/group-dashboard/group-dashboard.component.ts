@@ -15,15 +15,15 @@ export class GroupDashboardComponent implements OnInit {
     password: 'pwdMimi',
   };
 
-  private mockedGroupId = 1;
+  mockedGroupId = 1;
 
   isLoadingData = true;
 
   constructor(private userService: UserService, private groupService: GroupDashboardService) { }
 
   ngOnInit(): void {
-    this.userService.login(this.mockedUserLoginForm).then((response) => {
-      this.groupService.fetchGroupDashboardData(this.mockedGroupId).then((response) => {
+    this.userService.login(this.mockedUserLoginForm).then(() => {
+      this.groupService.fetchGroupDashboardData(this.mockedGroupId).then(() => {
         this.isLoadingData = false;
       });
     });

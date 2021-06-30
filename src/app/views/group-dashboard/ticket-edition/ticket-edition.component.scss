@@ -7,6 +7,16 @@
   width: 95%;
 }
 
-.ticketing-ticket-edition-users-container {
-  
+.ticketing-ticket-edition-radio-group {
+  display: flex;
+  margin: 15px 0;
+}
+
+.ticketing-ticket-edition-radio-button {
+  margin: 5px;
+}
+
+.ticket-ticket-edition-buttons-container {
+  display: flex;
+  justify-content: space-around;
 }
