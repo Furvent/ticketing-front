@@ -60,7 +60,6 @@ export class GroupsListComponent implements OnInit {
   }
 
   createNewGroup(newGroupName: string) {
-    console.log("newGroupName", newGroupName)
     this.gdService.addGroup(newGroupName).then(() => {
       const newData: GroupData[] = []
       this.groupsListData = newData.concat(this.gdService.getGroupsData().groupsData);

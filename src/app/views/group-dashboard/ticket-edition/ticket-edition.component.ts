@@ -29,7 +29,11 @@ export class TicketEditionComponent implements OnInit {
     this.isNewTicket = data.isNewTicket;
     this.pseudosSelected = new FormControl();
     this.selectableStatus = [TicketStatus.DONE, TicketStatus.CLOSED];
-    this.selectedStatus = this.getPreSelectedStatus();
+    if (data.isNewTicket) {
+      this.selectedStatus = "";
+    } else {
+      this.selectedStatus = this.getPreSelectedStatus();
+    }
   }
 
   ngOnInit(): void {
@@ -40,7 +44,13 @@ export class TicketEditionComponent implements OnInit {
 
   submit() {
     if (this.isNewTicket) {
-
+      const newTicket: NewTicket =  {
+        title: this.ticket.title,
+        description: this.ticket.description,
+        groupId: this.data.groupId,
+        usersOnTask: this.getSelectedUser(),
+      }
+      this.dialogRef.close(new TicketAfterEditionData(undefined, newTicket));
     } else {
       const updatedTicket: UpdatedTicket = {
         ticketId: this.ticket.id,
@@ -84,13 +94,16 @@ export class TicketEditionData {
   ticket: TicketData;
   isNewTicket: boolean;
   groupUsers: PublicUser[];
+  groupId: number;
   constructor(
     ticket: TicketData,
     isNewTicket: boolean,
-    groupUsers: PublicUser[] = []
+    groupId: number,
+    groupUsers: PublicUser[] = [],
   ) {
     this.ticket = ticket;
     this.isNewTicket = isNewTicket;
+    this.groupId = groupId;
     this.groupUsers = groupUsers;
   }
 }

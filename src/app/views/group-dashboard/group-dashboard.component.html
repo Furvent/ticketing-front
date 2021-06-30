@@ -19,7 +19,7 @@
       <app-my-tickets-list></app-my-tickets-list>
     </mat-tab>
     <mat-tab label="Group options">
-      <app-admin-options></app-admin-options>
+      <app-admin-options (refresh)="refreshMyTickets()"></app-admin-options>
     </mat-tab>
   </mat-tab-group>
 </div>

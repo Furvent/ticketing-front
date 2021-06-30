@@ -36,6 +36,10 @@ export class AllTicketsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTickets();
+  }
+
+  getTickets() {
     this.allTickets = this.groupService.getAllTickets();
     this.sortTicketsByLastStatus();
   }
@@ -82,18 +86,14 @@ export class AllTicketsListComponent implements OnInit {
     dialogConfig.data = new TicketEditionData(
       tempTicket,
       false,
-      this.groupService.getAllGroupUsers(),
+      this.groupService.getGroupId(),
+      this.groupService.getAllGroupUsers()
     );
     const dialogRef = this.dialog.open(TicketEditionComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data: TicketAfterEditionData) => {
-      if (data !== undefined) {
-        // Call service to update ticket or create ticket
-        if (data.newTicket) {
-
-        } else if (data.updatedTicket) {
-          // Call service to update ticket
-          this.updateTicket(data.updatedTicket);
-        }
+      if (data !== undefined && data.updatedTicket) {
+        // Call service to update ticket
+        this.updateTicket(data.updatedTicket);
       }
     });
   }
@@ -107,7 +107,7 @@ export class AllTicketsListComponent implements OnInit {
         this.allTickets = this.groupService.getAllTickets();
         this.sortTicketsByLastStatus();
         this.refresh.emit();
-      })
-    })
+      });
+    });
   }
 }

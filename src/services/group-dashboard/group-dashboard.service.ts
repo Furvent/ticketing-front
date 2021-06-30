@@ -34,7 +34,6 @@ export class GroupDashboardService {
     return new Promise((resolve, reject) => {
       this.apiService.addTicketRequest(newTicket).subscribe(
         (response) => {
-          this.data?.ticketsData.push(response);
           resolve(true);
         },
         (error) => {
@@ -119,6 +118,15 @@ export class GroupDashboardService {
       );
     } else {
       return [];
+    }
+  }
+
+  getGroupId() {
+    if (this.data && this.data.groupData.id) {
+      return this.data.groupData.id;
+    } else {
+      // TODO: Bad, to change
+      return 0;
     }
   }
 
