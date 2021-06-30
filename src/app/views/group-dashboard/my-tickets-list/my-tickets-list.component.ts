@@ -15,7 +15,7 @@ export class MyTicketsListComponent implements OnInit {
     private userService: UserService,
     private groupService: GroupDashboardService
   ) {
-    this.userId = userService.getUserData().id;
+    this.userId = this.userService.getUserData().id;
     this.myTicketsList = [];
   }
 
@@ -25,6 +25,5 @@ export class MyTicketsListComponent implements OnInit {
 
   getMyTickets() {
     this.myTicketsList = this.groupService.getAllTicketsWithUserId(this.userId);
-    console.log('this.myTicketsList', this.myTicketsList);
   }
 }
