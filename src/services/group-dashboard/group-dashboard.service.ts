@@ -99,6 +99,14 @@ export class GroupDashboardService {
     }
   }
 
+  getAllGroupUsers() {
+    if (this.data && this.data.groupData.users.length > 0) {
+      return this.data.groupData.users;
+    } else {
+      return [];
+    }
+  }
+
   private sortTicketHistory() {
     if (this.data && this.data.ticketsData.length > 0) {
       this.data.ticketsData.forEach(ticket => {

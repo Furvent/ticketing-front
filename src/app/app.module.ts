@@ -33,8 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreateGroupComponent } from './views/general-dashboard/groups-list/create-group/create-group.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-ticket-details.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,8 @@ import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-tic
     MatTableModule,
     MatDialogModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [
     {
