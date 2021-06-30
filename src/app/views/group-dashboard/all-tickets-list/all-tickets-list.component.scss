@@ -1,0 +1,49 @@
+.ticketing-all-tickets-main-container {
+  margin: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.ticketing-label-container {
+  width: 250px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  padding-bottom: 0.5rem;
+}
+
+.ticketing-horizontal-line {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px solid grey;
+}
+
+.ticketing-all-tickets-label-title {
+  margin-bottom: 0.5rem;
+}
+
+.ticketing-all-ticket-label-tickets-container {
+  
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  
+}
+
+.ticketing-all-tickets-ticket-container {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
+}
+
+.ticketing-all-tickets-ticket-buttons-container {
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}

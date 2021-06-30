@@ -13,6 +13,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
 export class GroupsListComponent implements OnInit {
   userPseudo: string;
   groupsListData: GroupData[] = [];
+  // Use to display table
   displayedColumns: string[] = ['name', 'creator', 'creationDate', 'button'];
 
   constructor(
