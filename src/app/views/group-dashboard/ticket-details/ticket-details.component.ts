@@ -38,5 +38,12 @@ export class TicketDetailsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  goBack(): void {
+    console.log("Must implement goBack method to return to said page");
+  }
+
+
 }
