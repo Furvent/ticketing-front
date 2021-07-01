@@ -9,6 +9,8 @@ import {
   TicketEditionData,
 } from '../ticket-edition/ticket-edition.component';
 import { cloneDeep } from 'lodash';
+import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
+import { TicketDetailsData, TicketDetailsModalComponent } from '../ticket-details-modal/ticket-details-modal.component';
 
 @Component({
   selector: 'app-all-tickets-list',
@@ -82,7 +84,7 @@ export class AllTicketsListComponent implements OnInit {
   openEditTicketDialog(ticket: TicketData) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true; // To put autocus on first input field
+    dialogConfig.autoFocus = true; // To put autofocus on first input field
     const tempTicket = cloneDeep(ticket);
     dialogConfig.data = new TicketEditionData(
       tempTicket,
@@ -99,16 +101,26 @@ export class AllTicketsListComponent implements OnInit {
     });
   }
 
+  openTicketDetailsDialog(ticket: TicketData) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = new TicketDetailsData(ticket, true);
+    this.dialog.open(TicketDetailsModalComponent, dialogConfig);
+  }
+
   /**
    * Refresh is temporary, will changes when using Observable
    */
   updateTicket(updatedTicket: UpdatedTicket) {
     this.groupService.updateTicket(updatedTicket).then(() => {
-      this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
-        this.allTickets = this.groupService.getAllTickets();
-        this.sortTicketsByLastStatus();
-        this.refresh.emit();
-      });
+      this.groupService
+        .fetchGroupDashboardData(this.groupIdSelected)
+        .then(() => {
+          this.allTickets = this.groupService.getAllTickets();
+          this.sortTicketsByLastStatus();
+          this.refresh.emit();
+        });
     });
   }
 }

@@ -1,17 +1,20 @@
 <div class="ticketing-signin-main-container">
-    <p class="ticketing-signin-inputfield-name">
-        <mat-form-field appearance="fill">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Connection Name" [(ngModel)]="username">
-            <mat-hint>The one you use on the platform!</mat-hint>
-        </mat-form-field>
-    </p>
-    <p class="ticketing-signin-inputfield-password">
-        <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Ssshh It's a secret!" [(ngModel)]="password">
-            <mat-hint>Yes! That one!</mat-hint>
-        </mat-form-field>
-    </p>
-    <button class="ticketing-signin-button" mat-button color="primary" (click)="signIn()">Sign In</button>
+  <mat-form-field class="ticketing-connection-inputfield" appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Connection Name" [(ngModel)]="username" />
+    <mat-hint>The one you use on the platform!</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="ticketing-connection-inputfield" id="input-password" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput placeholder="Ssshh It's a secret!" [(ngModel)]="password" />
+    <mat-hint>Yes! That one!</mat-hint>
+  </mat-form-field>
+  <button
+    class="ticketing-signin-button"
+    mat-raised-button
+    color="primary"
+    (click)="signIn()"
+  >
+    Sign In
+  </button>
 </div>

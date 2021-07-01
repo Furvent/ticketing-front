@@ -37,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-ticket-details.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { TicketDetailsModalComponent } from './views/group-dashboard/ticket-details-modal/ticket-details-modal.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MatRadioModule } from '@angular/material/radio';
     AddUserGroupComponent,
     CreateGroupComponent,
     TestTicketDetailsComponent,
+    TicketDetailsModalComponent,
   ],
   imports: [
     BrowserModule,

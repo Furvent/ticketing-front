@@ -1,6 +1,16 @@
-.ticketing-signup-button button,
-.ticketing-signup-button a {
-  margin-right: 8px;
+.ticketing-signup-main-container {
   display: flex;
-  align-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticketing-connection-inputfield {
+  width:95%;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.ticketing-signup-button {
+  margin-top: 1rem;
+  width: 40%;
 }

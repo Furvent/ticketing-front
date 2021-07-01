@@ -1,1 +1,3 @@
-<p>my-tickets-list works!</p>
+<div class="ticketing-my-tickets-list-main-container">
+  <app-ticket-details class="ticketing-my-tickets-list-ticket" *ngFor="let ticket of myTicketsList" [ticket]="ticket" [flagDisplayTicketComment]="false"></app-ticket-details>
+</div>

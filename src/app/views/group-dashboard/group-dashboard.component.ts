@@ -8,10 +8,9 @@ import { MyTicketsListComponent } from './my-tickets-list/my-tickets-list.compon
 @Component({
   selector: 'app-group-dashboard',
   templateUrl: './group-dashboard.component.html',
-  styleUrls: ['./group-dashboard.component.scss']
+  styleUrls: ['./group-dashboard.component.scss'],
 })
 export class GroupDashboardComponent implements OnInit {
-
   @ViewChild(MyTicketsListComponent)
   private myTicketsComponent!: MyTicketsListComponent;
 
@@ -23,14 +22,34 @@ export class GroupDashboardComponent implements OnInit {
 
   isLoadingData = true;
 
-  constructor(private groupService: GroupDashboardService) { 
+  private mockedUserLoginForm: LoginForm = {
+    username: 'mimi',
+    password: 'pwdMimi',
+  };
+
+  mockedGroupId = 1;
+
+  constructor(
+    private groupService: GroupDashboardService,
+    private userService: UserService
+  ) {
     this.groupIdSelected = groupService.getGroupIdSelectedByUser();
-   }
+  }
 
   ngOnInit(): void {
-      this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
+    // this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
+    //   this.isLoadingData = false;
+    // });
+    this.mockedConnection();
+  }
+
+  mockedConnection() {
+    this.groupService.setGroupIdSelectedByUser(1);
+    this.userService.login(this.mockedUserLoginForm).then(() => {
+      this.groupService.fetchGroupDashboardData(this.mockedGroupId).then(() => {
         this.isLoadingData = false;
       });
+    });
   }
 
   // Temporary, will change with Observable
@@ -38,5 +57,4 @@ export class GroupDashboardComponent implements OnInit {
     this.myTicketsComponent.getMyTickets();
     this.allTicketscomponent.getTickets();
   }
-
 }

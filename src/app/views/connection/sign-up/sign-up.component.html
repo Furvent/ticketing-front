@@ -1,24 +1,18 @@
 <div class="ticketing-signup-main-container">
-<p class="ticketing-signup-inputfield-name">
-    <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="Connection Name">
-      <mat-hint>Who are you?</mat-hint>
-    </mat-form-field>
-  </p>
-  <p class="ticketing-signup-inputfield-password">
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Ssshh It's a secret!">
-      <mat-hint>Not your mom's name!</mat-hint>
-    </mat-form-field>
-  </p>
-  <p class="ticketing-signup-inputfield-password">
-    <mat-form-field appearance="fill">
-      <mat-label>Pseudo</mat-label>
-      <input matInput placeholder="A cool one!">
-      <mat-hint>As if you were a superhero</mat-hint>
-    </mat-form-field>
-  </p>
-    <button mat-button color="primary" (click)="onSelect()">Sign Up</button>
-  </div>
+  <mat-form-field class="ticketing-connection-inputfield" appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Connection Name" />
+    <mat-hint>Who are you?</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="ticketing-connection-inputfield" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Ssshh It's a secret!" />
+    <mat-hint>Not your mom's name!</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="ticketing-connection-inputfield" appearance="fill">
+    <mat-label>Pseudo</mat-label>
+    <input matInput placeholder="A cool one!" />
+    <mat-hint>As if you were a superhero</mat-hint>
+  </mat-form-field>
+  <button class="ticketing-signup-button" mat-raised-button color="primary" (click)="onSelect()">Sign Up</button>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TicketData } from 'src/shared/definitions/common';
 
 @Component({
@@ -7,7 +8,7 @@ import { TicketData } from 'src/shared/definitions/common';
   styleUrls: ['./ticket-details.component.scss'],
 })
 export class TicketDetailsComponent implements OnInit {
-  ticket: TicketData = {
+  @Input() ticket: TicketData = {
     id: 1,
     title: 'qzdq',
     description: '<qqdqdqdzgskf<hqzhfd opqizdhq qdhioQzd',
@@ -36,14 +37,14 @@ export class TicketDetailsComponent implements OnInit {
     ],
   };
 
-  constructor() {}
+  @Input() flagDisplayTicketComment = false;
 
-  ngOnInit(): void {
+  constructor(
+    
+  ) {
+    
   }
 
-  goBack(): void {
-    console.log("Must implement goBack method to return to said page");
-  }
-
+  ngOnInit(): void {}
 
 }

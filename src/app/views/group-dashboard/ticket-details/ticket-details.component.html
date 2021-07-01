@@ -1,25 +1,40 @@
 <mat-card class="ticketing-ticket-details-main-container">
-    <mat-card-header>
-        <h1 class="ticketing-ticket-details-main-title">- {{ticket.title | uppercase}} -</h1>
-    </mat-card-header>
-    <mat-card-content>
-        <h2 class="ticketing-ticket-details-sub-title">Details</h2>
-        <p>
-        {{ticket.description}}
-        </p>
-        <h2 class="ticketing-ticket-details-sub-title">Working On</h2>
-        <p *ngFor="let status of ticket.usersOnTask">
-            <span>{{status.pseudo}} </span>
-        </p>
-        <h2 class="ticketing-ticket-details-sub-title">History</h2>
-        <p *ngFor="let status of ticket.history">
-            <span>{{status.label}} </span><span class="ticketing-ticket-details-history-date"> {{status.date}}</span>
-        </p>
-        <h2 class="ticketing-ticket-details-sub-title">Comments</h2>
-        <p class="ticketing-ticket-details-comments-container" *ngFor="let status of ticket.commentsToDisplay">
-            <span>{{status.author}} </span><span class="ticketing-ticket-details-comments-date">{{status.creationDate}}</span><br>
-            <span>{{status.text}} </span>
-        </p>
-    </mat-card-content>
-    <button mat-stroked-button color="primary" (click)="goBack()">Go Back</button>
+  <h1 class="ticketing-ticket-details-main-title">
+    {{ ticket.title | uppercase }}
+  </h1>
+
+  <mat-card-content>
+    <h2 class="ticketing-ticket-details-sub-title">Details</h2>
+    <p>
+      {{ ticket.description }}
+    </p>
+
+    <h2 class="ticketing-ticket-details-sub-title">Working On</h2>
+      <p *ngFor="let status of ticket.usersOnTask">
+        <span>{{ status.pseudo }} </span>
+      </p>
+
+    <h2 class="ticketing-ticket-details-sub-title">History</h2>
+    <p *ngFor="let status of ticket.history">
+      <span>{{ status.label }} </span
+      ><span class="ticketing-ticket-details-history-date">
+        {{ status.date | date }}</span
+      >
+    </p>
+
+    <div *ngIf="flagDisplayTicketComment">
+      <h2 class="ticketing-ticket-details-sub-title">Comments</h2>
+      <p
+        class="ticketing-ticket-details-comments-container"
+        *ngFor="let status of ticket.commentsToDisplay"
+      >
+        <span>{{ status.author }} </span
+        ><span class="ticketing-ticket-details-comments-date">{{
+          status.creationDate | date
+        }}</span
+        ><br />
+        <span>{{ status.text }} </span>
+      </p>
+    </div>
+  </mat-card-content>
 </mat-card>
