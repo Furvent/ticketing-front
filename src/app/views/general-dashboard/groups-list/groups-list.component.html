@@ -1,7 +1,7 @@
 <div class="ticketing-main-container-group-lists">
   <header class="ticketing-header-groups-lists"> 
     <h1>My Groups</h1>
-    <button mat-raised-button color="primary" (click)="openCreateGroupModal()">Create a new group</button>
+    <button mat-flat-button color="primary" (click)="openCreateGroupModal()">Create a new group</button>
   </header>
   <div class="ticketing-groups-list-content-container">
     <table mat-table [dataSource]="groupsListData" class="">
@@ -26,7 +26,7 @@
       <!-- Button Column -->
       <ng-container matColumnDef="button">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let group"> <button mat-raised-button color="accent" (click)="enterGroup(group.id)">Enter</button> </td>
+        <td mat-cell *matCellDef="let group"> <button mat-flat-button color="accent" (click)="enterGroup(group.id)">Enter</button> </td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

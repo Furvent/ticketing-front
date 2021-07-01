@@ -60,14 +60,12 @@ export class TestingServicesComponent implements OnInit {
     author: "Furvent",
     text: "A new comment on a ticket",
     entityId: 2,
-    entityType: "TICKET",
   }
 
   mockedNewCommentOnGroup: NewComment = {
     author: "Furvent",
     text: "A new comment on a group",
     entityId: 1,
-    entityType: "GROUP",
   }
 
   userData: UserData | null = null;

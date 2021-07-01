@@ -1,6 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
+import { UserService } from 'src/services/user/user.service';
 import { TicketData } from 'src/shared/definitions/common';
+import { EntityType } from 'src/shared/enums/entity-type';
 
 @Component({
   selector: 'app-ticket-details',
@@ -39,12 +42,25 @@ export class TicketDetailsComponent implements OnInit {
 
   @Input() flagDisplayTicketComment = false;
 
-  constructor(
-    
-  ) {
-    
-  }
+  commentInputText = '';
+
+  constructor(private groupService: GroupDashboardService, private userService: UserService) {}
 
   ngOnInit(): void {}
 
+  sendcomment() {
+    if (this.commentInputText !== "") {
+      this.groupService.addCommentOnTicket({
+        author: this.userService.getUserData().pseudo,
+        text: this.commentInputText,
+        entityId: this.ticket.id,
+      }).then(() => {
+        this.ticket.commentsToDisplay.push({
+          author: this.userService.getUserData().pseudo,
+          text: this.commentInputText,
+          creationDate: new Date(Date.now()).toDateString(),
+        })
+      })
+    }
+  }
 }

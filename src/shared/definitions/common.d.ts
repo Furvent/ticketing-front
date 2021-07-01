@@ -82,7 +82,6 @@ export type StatusData = {
 
 export type NewComment = {
   entityId: number;
-	entityType: string;
   text: string;
   author: string;
 }
