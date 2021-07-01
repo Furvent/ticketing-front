@@ -20,7 +20,7 @@ export class UserService {
 
   constructor(private apiService: ApiService) {}
 
-  async login(loginForm: LoginForm): Promise<boolean> {
+  login(loginForm: LoginForm): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.apiService.loginRequest(loginForm).subscribe(
         (response) => {
@@ -34,7 +34,7 @@ export class UserService {
     });
   }
 
-  signIn(newUser: NewUser): Promise<boolean> {
+  signUp(newUser: NewUser): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.apiService.createUserRequest(newUser).subscribe(
         (response) => {

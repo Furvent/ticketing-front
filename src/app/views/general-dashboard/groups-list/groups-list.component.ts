@@ -4,6 +4,8 @@ import { UserService } from 'src/services/user/user.service';
 import { GroupData } from 'src/shared/definitions/common';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateGroupComponent } from './create-group/create-group.component';
+import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-groups-list',
@@ -19,6 +21,8 @@ export class GroupsListComponent implements OnInit {
   constructor(
     private gdService: GeneralDashboardService,
     private userService: UserService,
+    private groupService: GroupDashboardService,
+    private router: Router,
     private dialog: MatDialog
   ) {
     this.userPseudo = this.userService.getUserData().pseudo;
@@ -38,7 +42,7 @@ export class GroupsListComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateGroupComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       if (data !== undefined) {
-        this.createNewGroup(data)
+        this.createNewGroup(data);
       }
     });
   }
@@ -52,7 +56,9 @@ export class GroupsListComponent implements OnInit {
   }
 
   enterGroup(groupId: number) {
-    console.log('groupId', groupId);
+    console.log("groupIdSelected in button", groupId);
+    this.groupService.setGroupIdSelectedByUser(groupId);
+    this.router.navigate(['group-dashboard']);
   }
 
   openCreateGroupModal() {
@@ -61,8 +67,12 @@ export class GroupsListComponent implements OnInit {
 
   createNewGroup(newGroupName: string) {
     this.gdService.addGroup(newGroupName).then(() => {
-      const newData: GroupData[] = []
-      this.groupsListData = newData.concat(this.gdService.getGroupsData().groupsData);
-    })
+      this.gdService.fetchGeneralDashboardData().then(() => {
+        const newData: GroupData[] = [];
+        this.groupsListData = newData.concat(
+          this.gdService.getGroupsData().groupsData
+        );
+      });
+    });
   }
 }

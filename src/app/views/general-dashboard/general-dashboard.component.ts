@@ -9,11 +9,6 @@ import { LoginForm } from 'src/shared/definitions/common';
   styleUrls: ['./general-dashboard.component.scss'],
 })
 export class GeneralDashboardComponent implements OnInit {
-  private mockedUserLoginForm: LoginForm = {
-    username: 'mimi',
-    password: 'pwdMimi',
-  };
-
   isLoadingData = true;
 
   constructor(
@@ -22,10 +17,8 @@ export class GeneralDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.login(this.mockedUserLoginForm).then((response) => {
-      this.generalService.fetchGeneralDashboardData().then((response) => {
-        this.isLoadingData = false;
-      });
+    this.generalService.fetchGeneralDashboardData().then((response) => {
+      this.isLoadingData = false;
     });
   }
 }

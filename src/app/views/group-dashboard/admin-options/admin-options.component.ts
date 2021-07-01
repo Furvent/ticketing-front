@@ -14,13 +14,15 @@ import {
   styleUrls: ['./admin-options.component.scss'],
 })
 export class AdminOptionsComponent implements OnInit {
-
+  groupIdSelected: number;
   @Output() refresh = new EventEmitter();
 
   constructor(
     private groupService: GroupDashboardService,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.groupIdSelected = groupService.getGroupIdSelectedByUser();
+  }
 
   ngOnInit(): void {}
 
@@ -39,7 +41,7 @@ export class AdminOptionsComponent implements OnInit {
     dialogConfig.data = new TicketEditionData(
       ticketData,
       true,
-      this.groupService.getGroupId(),
+      this.groupIdSelected,
       this.groupService.getAllGroupUsers()
     );
     const dialogRef = this.dialog.open(TicketEditionComponent, dialogConfig);
@@ -52,7 +54,7 @@ export class AdminOptionsComponent implements OnInit {
 
   createTicket(newTicket: NewTicket) {
     this.groupService.addTicket(newTicket).then(() => {
-      this.groupService.fetchGroupDashboardData(this.groupService.getGroupId()).then(() => {
+      this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
         this.refresh.emit();
       })
     })

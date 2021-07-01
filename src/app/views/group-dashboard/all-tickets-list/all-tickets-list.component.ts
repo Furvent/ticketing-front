@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { TicketData, UpdatedTicket } from 'src/shared/definitions/common';
@@ -16,7 +16,7 @@ import { cloneDeep } from 'lodash';
   styleUrls: ['./all-tickets-list.component.scss'],
 })
 export class AllTicketsListComponent implements OnInit {
-  @Input() groupId = 1;
+  groupIdSelected: number;
   allTickets: TicketData[] = [];
 
   openedTickets: TicketData[] = [];
@@ -33,6 +33,7 @@ export class AllTicketsListComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.ticketStatusLabels = getAllStatus();
+    this.groupIdSelected = this.groupService.getGroupIdSelectedByUser();
   }
 
   ngOnInit(): void {
@@ -86,7 +87,7 @@ export class AllTicketsListComponent implements OnInit {
     dialogConfig.data = new TicketEditionData(
       tempTicket,
       false,
-      this.groupService.getGroupId(),
+      this.groupIdSelected,
       this.groupService.getAllGroupUsers()
     );
     const dialogRef = this.dialog.open(TicketEditionComponent, dialogConfig);
@@ -103,7 +104,7 @@ export class AllTicketsListComponent implements OnInit {
    */
   updateTicket(updatedTicket: UpdatedTicket) {
     this.groupService.updateTicket(updatedTicket).then(() => {
-      this.groupService.fetchGroupDashboardData(this.groupId).then(() => {
+      this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
         this.allTickets = this.groupService.getAllTickets();
         this.sortTicketsByLastStatus();
         this.refresh.emit();

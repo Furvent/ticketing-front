@@ -19,7 +19,7 @@ import {
   providedIn: 'root',
 })
 export class ApiService {
-  apiTicketingURL = 'http://localhost:8082/api/';
+  apiTicketingURL = 'http://localhost:8082/api';
 
   constructor(private httpClient: HttpClient) {}
 

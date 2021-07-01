@@ -111,7 +111,7 @@ export class TestingServicesComponent implements OnInit {
 
   private testNewUser(): void {
     this.userService
-      .signIn(this.mockedNewUser)
+      .signUp(this.mockedNewUser)
       .then((response) => {
         this.userData = this.userService.getUserData();
       })

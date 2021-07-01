@@ -12,6 +12,7 @@ import {
 })
 export class GroupDashboardService {
   data: GroupDashboardData | null = null;
+  groupIdSelectedByUser: number = 0;
 
   constructor(private apiService: ApiService) {}
 
@@ -121,13 +122,12 @@ export class GroupDashboardService {
     }
   }
 
-  getGroupId() {
-    if (this.data && this.data.groupData.id) {
-      return this.data.groupData.id;
-    } else {
-      // TODO: Bad, to change
-      return 0;
-    }
+  getGroupIdSelectedByUser() {
+   return this.groupIdSelectedByUser;
+  }
+
+  setGroupIdSelectedByUser(id: number) {
+    this.groupIdSelectedByUser = id;
   }
 
   private sortTicketHistory() {

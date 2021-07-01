@@ -18,23 +18,19 @@ export class GroupDashboardComponent implements OnInit {
   @ViewChild(AllTicketsListComponent)
   private allTicketscomponent!: AllTicketsListComponent;
 
-  private mockedUserLoginForm: LoginForm = {
-    username: 'mimi',
-    password: 'pwdMimi',
-  };
-
-  mockedGroupId = 1;
+  // TODO: Remove all ref to groupId, and get it in service groupDashboard
+  groupIdSelected: number;
 
   isLoadingData = true;
 
-  constructor(private userService: UserService, private groupService: GroupDashboardService) { }
+  constructor(private groupService: GroupDashboardService) { 
+    this.groupIdSelected = groupService.getGroupIdSelectedByUser();
+   }
 
   ngOnInit(): void {
-    this.userService.login(this.mockedUserLoginForm).then(() => {
-      this.groupService.fetchGroupDashboardData(this.mockedGroupId).then(() => {
+      this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
         this.isLoadingData = false;
       });
-    });
   }
 
   // Temporary, will change with Observable
