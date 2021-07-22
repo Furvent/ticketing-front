@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -6,7 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './create-group.component.html',
   styleUrls: ['./create-group.component.scss'],
 })
-export class CreateGroupComponent implements OnInit {
+export class CreateGroupComponent {
 
   name: string;
 
@@ -15,9 +15,6 @@ export class CreateGroupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: any
   ) {
     this.name = data.name;
-  }
-
-  ngOnInit(): void {
   }
 
   save() {

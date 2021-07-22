@@ -1,9 +1,7 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { TicketData } from 'src/shared/definitions/common';
-import { EntityType } from 'src/shared/enums/entity-type';
 
 @Component({
   selector: 'app-ticket-details',

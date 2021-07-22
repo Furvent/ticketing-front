@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/services/user/user.service';
 import { LoginForm } from 'src/shared/definitions/common';
@@ -8,18 +8,11 @@ import { LoginForm } from 'src/shared/definitions/common';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
   username: string = '';
   password: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
-
-  ngOnInit(): void {}
-
-  onSelect(): void {
-    console.log('this.username', this.username);
-    console.log('this.password', this.password);
-  }
 
   signIn() {
     const loginForm: LoginForm = {

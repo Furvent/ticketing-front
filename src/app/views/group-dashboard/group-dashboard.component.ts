@@ -26,7 +26,6 @@ export class GroupDashboardComponent implements OnInit {
     username: 'mimi',
     password: 'pwdMimi',
   };
-
   mockedGroupId = 1;
 
   constructor(
