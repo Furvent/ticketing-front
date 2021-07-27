@@ -38,6 +38,9 @@ import { TestTicketDetailsComponent } from './tests/test-ticket-details/test-tic
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { TicketDetailsModalComponent } from './views/group-dashboard/ticket-details-modal/ticket-details-modal.component';
+import { HeaderComponent } from './views/header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { TicketDetailsModalComponent } from './views/group-dashboard/ticket-deta
     CreateGroupComponent,
     TestTicketDetailsComponent,
     TicketDetailsModalComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +84,8 @@ import { TicketDetailsModalComponent } from './views/group-dashboard/ticket-deta
     ReactiveFormsModule,
     MatSelectModule,
     MatRadioModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [
     {

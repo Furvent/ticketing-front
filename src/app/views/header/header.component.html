@@ -1,0 +1,6 @@
+<mat-toolbar color="primary">
+  <span>Welcome to Ticketing {{ getUserPseudo() | titlecase }}</span>
+  <button mat-button color="accent">Profile</button>
+  <button *ngIf="flagDisplayButtonBackToGeneralDashboard" class="ticketing-header-right-buttons" mat-button color="accent" (click)="backToGeneralDashboard()">Your groups</button>
+  <button [ngClass]="{'ticketing-header-right-buttons': !flagDisplayButtonBackToGeneralDashboard}" mat-button color="accent" (click)="logout()">Logout</button>
+</mat-toolbar>

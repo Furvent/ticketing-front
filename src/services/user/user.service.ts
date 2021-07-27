@@ -65,4 +65,13 @@ export class UserService {
   getUserData() {
     return this.userData;
   }
+
+  resetData() {
+    this.userData = {
+      id: 0,
+      pseudo: "",
+      username: "",
+      creationAccountDate: "",
+    }
+  }
 }

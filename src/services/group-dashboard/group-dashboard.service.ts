@@ -130,6 +130,11 @@ export class GroupDashboardService {
     this.groupIdSelectedByUser = id;
   }
 
+  resetData() {
+    this.data = null;
+    this.groupIdSelectedByUser = 0;
+  }
+
   private sortTicketHistory() {
     if (this.data && this.data.ticketsData.length > 0) {
       this.data.ticketsData.forEach((ticket) => {

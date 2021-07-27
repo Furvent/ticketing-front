@@ -56,4 +56,8 @@ export class GeneralDashboardService {
   getGroupsData() {
     return this.data;
   }
+
+  resetData() {
+    this.data.groupsData = [];
+  }
 }
