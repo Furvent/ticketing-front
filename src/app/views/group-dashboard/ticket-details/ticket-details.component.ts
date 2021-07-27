@@ -9,56 +9,38 @@ import { TicketData } from 'src/shared/definitions/common';
   styleUrls: ['./ticket-details.component.scss'],
 })
 export class TicketDetailsComponent implements OnInit {
-  @Input() ticket: TicketData = {
-    id: 1,
-    title: 'qzdq',
-    description: '<qqdqdqdzgskf<hqzhfd opqizdhq qdhioQzd',
-    history: [
-      {
-        date: '20/01/2021',
-        label: 'CREATED',
-      },
-      {
-        date: '20/01/2021',
-        label: 'ALLOCATED',
-      },
-    ],
-    commentsToDisplay: [
-      {
-        author: 'qsdq',
-        creationDate: '22/01/2021',
-        text: 'HAHAHAHAHAHA',
-      },
-    ],
-    usersOnTask: [
-      {
-        id: 1,
-        pseudo: 'Bob Lennon',
-      },
-    ],
-  };
+  @Input()
+  ticket!: TicketData;
 
   @Input() flagDisplayTicketComment = false;
 
   commentInputText = '';
 
-  constructor(private groupService: GroupDashboardService, private userService: UserService) {}
+  constructor(
+    private groupService: GroupDashboardService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {}
 
-  sendcomment() {
-    if (this.commentInputText !== "") {
-      this.groupService.addCommentOnTicket({
+  sendComment() {
+    if (this.commentInputText !== '') {
+      const newComment = {
         author: this.userService.getUserData().pseudo,
         text: this.commentInputText,
-        entityId: this.ticket.id,
-      }).then(() => {
-        this.ticket.commentsToDisplay.push({
-          author: this.userService.getUserData().pseudo,
-          text: this.commentInputText,
-          creationDate: new Date(Date.now()).toDateString(),
+      };
+      this.groupService
+        .addCommentOnTicket({
+          ...newComment,
+          entityId: this.ticket.id,
         })
-      })
+        .then(() => {
+          this.ticket.commentsToDisplay.push({
+            ...newComment,
+            creationDate: new Date(Date.now()).toDateString(),
+          });
+          this.commentInputText = '';
+        });
     }
   }
 }
