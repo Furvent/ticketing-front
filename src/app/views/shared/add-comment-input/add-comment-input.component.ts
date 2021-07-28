@@ -11,9 +11,9 @@ import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
 })
 export class AddCommentInputComponent implements OnInit {
   @Input()
-  ticketComments!: Comment[];
+  entityComments!: Comment[];
   @Input()
-  ticketId!: number;
+  entityId!: number;
 
   @Input()
   entityType!: EntityTypeComment;
@@ -36,12 +36,12 @@ export class AddCommentInputComponent implements OnInit {
       this.groupService
         .addCommentOnEntity({
           ...newComment,
-          entityId: this.ticketId,
+          entityId: this.entityId,
         }, this.entityType)
         .then(() => {
-          this.ticketComments.push({
+          this.entityComments.push({
             ...newComment,
-            creationDate: new Date(Date.now()).toDateString(),
+            creationDate: new Date(Date.now()).toString(),
           });
           this.commentInputText = '';
         });

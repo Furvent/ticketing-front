@@ -43,6 +43,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { GroupCommentsComponent } from './views/group-dashboard/group-comments/group-comments.component';
 import { AddCommentInputComponent } from './views/shared/add-comment-input/add-comment-input.component';
+import { CommentEntryComponent } from './views/shared/comment-entry/comment-entry.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AddCommentInputComponent } from './views/shared/add-comment-input/add-c
     HeaderComponent,
     GroupCommentsComponent,
     AddCommentInputComponent,
+    CommentEntryComponent,
   ],
   imports: [
     BrowserModule,

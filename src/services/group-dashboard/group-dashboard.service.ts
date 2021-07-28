@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
 import {
+  Comment,
   GroupDashboardData,
   NewComment,
   NewTicket,
@@ -78,7 +79,7 @@ export class GroupDashboardService {
       return this.addCommentOnTicket(newComment);
     } else {
       return new Promise((reject) => {
-        reject("Wrong entity type")
+        reject('Wrong entity type');
       });
     }
   }
@@ -130,6 +131,14 @@ export class GroupDashboardService {
       return this.data.ticketsData.filter((ticket) =>
         ticket.usersOnTask.find((user) => user.id === userId)
       );
+    } else {
+      return [];
+    }
+  }
+
+  getGroupComments(): Comment[] {
+    if (this.data && this.data.commentsToDisplay.length > 0) {
+      return this.data.commentsToDisplay;
     } else {
       return [];
     }

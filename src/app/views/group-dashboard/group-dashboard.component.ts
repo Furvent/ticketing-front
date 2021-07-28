@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
-import { LoginForm } from 'src/shared/definitions/common';
+import { Comment, LoginForm } from 'src/shared/definitions/common';
+import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
 import { AllTicketsListComponent } from './all-tickets-list/all-tickets-list.component';
 import { MyTicketsListComponent } from './my-tickets-list/my-tickets-list.component';
 
@@ -36,10 +37,10 @@ export class GroupDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
-      this.isLoadingData = false;
-    });
-    // this.mockedConnection();
+    // this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
+    //   this.isLoadingData = false;
+    // });
+    this.mockedConnection();
   }
 
   mockedConnection() {

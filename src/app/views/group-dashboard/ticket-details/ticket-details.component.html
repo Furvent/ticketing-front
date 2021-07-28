@@ -36,8 +36,8 @@
         <span>{{ comment.text }} </span>
       </p>
       <app-add-comment-input
-        [ticketComments]="ticket.commentsToDisplay"
-        [ticketId]="ticket.id"
+        [entityComments]="ticket.commentsToDisplay"
+        [entityId]="ticket.id"
         [entityType]="ticketEntity"
       ></app-add-comment-input>
     </div>
