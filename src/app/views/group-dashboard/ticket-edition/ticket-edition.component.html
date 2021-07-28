@@ -1,11 +1,11 @@
 <div class="ticketing-ticket-edition-main-container">
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's title</mat-label>
-    <input type="text" matInput [(ngModel)]="ticket.title" (keyup)="onEnter()"/>
+    <input type="text" matInput [(ngModel)]="ticket.title" (keyup)="checkFlagDisableModif()"/>
   </mat-form-field>
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's description</mat-label>
-    <textarea matInput [(ngModel)]="ticket.description" (keyup)="onEnter()"></textarea>
+    <textarea matInput [(ngModel)]="ticket.description" (keyup)="checkFlagDisableModif()"></textarea>
   </mat-form-field>
   <div>
     <h3>Add user(s) on task</h3>

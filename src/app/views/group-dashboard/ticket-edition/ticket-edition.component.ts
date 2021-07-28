@@ -35,6 +35,7 @@ export class TicketEditionComponent implements OnInit {
     } else {
       this.selectedStatus = this.getPreSelectedStatus();
     }
+    this.checkFlagDisableModif();
   }
 
   ngOnInit(): void {
@@ -84,7 +85,7 @@ export class TicketEditionComponent implements OnInit {
     })
   }
 
-  onEnter() {
+  checkFlagDisableModif() {
     this.flagDisableModif = this.ticket.title.trim() === '' || this.ticket.description.trim() === '' 
   }
 }
