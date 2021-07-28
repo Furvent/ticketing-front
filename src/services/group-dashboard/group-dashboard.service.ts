@@ -6,6 +6,7 @@ import {
   NewTicket,
   UpdatedTicket,
 } from 'src/shared/definitions/common';
+import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,18 @@ export class GroupDashboardService {
     });
   }
 
+  addCommentOnEntity(newComment: NewComment, entityType: EntityTypeComment) {
+    if (entityType === EntityTypeComment.GROUP) {
+      return this.addCommentOnGroup(newComment);
+    } else if (entityType === EntityTypeComment.TICKET) {
+      return this.addCommentOnTicket(newComment);
+    } else {
+      return new Promise((reject) => {
+        reject("Wrong entity type")
+      });
+    }
+  }
+
   addCommentOnGroup(newComment: NewComment) {
     return new Promise((resolve, reject) => {
       this.apiService.addGroupCommentRequest(newComment).subscribe(
@@ -115,7 +128,7 @@ export class GroupDashboardService {
   getAllTicketsWithUserId(userId: number) {
     if (this.data && this.data.ticketsData.length > 0) {
       return this.data.ticketsData.filter((ticket) =>
-        ticket.usersOnTask.find((user) => (user.id === userId))
+        ticket.usersOnTask.find((user) => user.id === userId)
       );
     } else {
       return [];
@@ -123,7 +136,7 @@ export class GroupDashboardService {
   }
 
   getGroupIdSelectedByUser() {
-   return this.groupIdSelectedByUser;
+    return this.groupIdSelectedByUser;
   }
 
   setGroupIdSelectedByUser(id: number) {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { Comment } from 'src/shared/definitions/common';
+import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
 
 @Component({
   selector: 'app-add-comment-input',
@@ -13,6 +14,9 @@ export class AddCommentInputComponent implements OnInit {
   ticketComments!: Comment[];
   @Input()
   ticketId!: number;
+
+  @Input()
+  entityType!: EntityTypeComment;
 
   commentInputText = '';
 
@@ -30,10 +34,10 @@ export class AddCommentInputComponent implements OnInit {
         text: this.commentInputText,
       };
       this.groupService
-        .addCommentOnTicket({
+        .addCommentOnEntity({
           ...newComment,
           entityId: this.ticketId,
-        })
+        }, this.entityType)
         .then(() => {
           this.ticketComments.push({
             ...newComment,
