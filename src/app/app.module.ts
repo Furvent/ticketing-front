@@ -41,6 +41,8 @@ import { TicketDetailsModalComponent } from './views/group-dashboard/ticket-deta
 import { HeaderComponent } from './views/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { GroupCommentsComponent } from './views/group-dashboard/group-comments/group-comments.component';
+import { AddCommentInputComponent } from './views/shared/add-comment-input/add-comment-input.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { MatIconModule } from '@angular/material/icon';
     TestTicketDetailsComponent,
     TicketDetailsModalComponent,
     HeaderComponent,
+    GroupCommentsComponent,
+    AddCommentInputComponent,
   ],
   imports: [
     BrowserModule,

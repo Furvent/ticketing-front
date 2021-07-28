@@ -10,9 +10,9 @@
     </p>
 
     <h2 class="ticketing-ticket-details-sub-title">Working On</h2>
-      <p *ngFor="let status of ticket.usersOnTask">
-        <span>{{ status.pseudo }} </span>
-      </p>
+    <p *ngFor="let status of ticket.usersOnTask">
+      <span>{{ status.pseudo }} </span>
+    </p>
 
     <h2 class="ticketing-ticket-details-sub-title">History</h2>
     <p *ngFor="let status of ticket.history">
@@ -26,24 +26,19 @@
       <h2 class="ticketing-ticket-details-sub-title">Comments</h2>
       <p
         class="ticketing-ticket-details-comments-container"
-        *ngFor="let status of ticket.commentsToDisplay"
+        *ngFor="let comment of ticket.commentsToDisplay"
       >
-        <span>{{ status.author }} </span
+        <span>{{ comment.author }} </span
         ><span class="ticketing-ticket-details-comments-date">{{
-          status.creationDate | date
+          comment.creationDate | date
         }}</span
         ><br />
-        <span>{{ status.text }} </span>
+        <span>{{ comment.text }} </span>
       </p>
-
-      <div class="ticketing-ticket-details-comment-input-container">
-        <mat-form-field class="ticketing-ticket-details-comment-inputfield" appearance="fill">
-          <mat-label>New comment</mat-label>
-          <textarea type="text" matInput placeholder="What's in your mind?" [(ngModel)]="commentInputText"></textarea>
-        </mat-form-field>
-        <button class="ticketing-ticket-details-comment-input-button" mat-raised-button color="primary" (click)="sendComment()">Send</button>
-      </div>
-      
+      <app-add-comment-input
+        [ticketComments]="ticket.commentsToDisplay"
+        [ticketId]="ticket.id"
+      ></app-add-comment-input>
     </div>
   </mat-card-content>
 </mat-card>
