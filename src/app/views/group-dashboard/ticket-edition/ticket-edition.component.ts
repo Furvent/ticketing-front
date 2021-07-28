@@ -17,6 +17,7 @@ export class TicketEditionComponent implements OnInit {
   pseudosSelected: FormControl;
   selectedStatus: string;
   selectableStatus: String[];
+  flagDisableModif = true;
 
   constructor(
     private dialogRef: MatDialogRef<TicketEditionComponent>,
@@ -81,6 +82,10 @@ export class TicketEditionComponent implements OnInit {
     return this.data.groupUsers.filter(user => {
       return this.pseudosSelected.value.find((pseudo: string) => user.pseudo === pseudo);
     })
+  }
+
+  onEnter() {
+    this.flagDisableModif = this.ticket.title.trim() === '' || this.ticket.description.trim() === '' 
   }
 }
 

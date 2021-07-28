@@ -20,6 +20,8 @@ export class AddCommentInputComponent implements OnInit {
 
   commentInputText = '';
 
+  flagDisableSend = true;
+
   constructor(
     private groupService: GroupDashboardService,
     private userService: UserService
@@ -34,10 +36,13 @@ export class AddCommentInputComponent implements OnInit {
         text: this.commentInputText,
       };
       this.groupService
-        .addCommentOnEntity({
-          ...newComment,
-          entityId: this.entityId,
-        }, this.entityType)
+        .addCommentOnEntity(
+          {
+            ...newComment,
+            entityId: this.entityId,
+          },
+          this.entityType
+        )
         .then(() => {
           this.entityComments.push({
             ...newComment,
@@ -46,5 +51,9 @@ export class AddCommentInputComponent implements OnInit {
           this.commentInputText = '';
         });
     }
+  }
+
+  onEnter() {
+    this.flagDisableSend = this.commentInputText.trim() === '';
   }
 }
