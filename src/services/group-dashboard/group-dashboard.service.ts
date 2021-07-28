@@ -5,6 +5,7 @@ import {
   GroupDashboardData,
   NewComment,
   NewTicket,
+  PublicUser,
   UpdatedTicket,
 } from 'src/shared/definitions/common';
 import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
@@ -17,6 +18,7 @@ export class GroupDashboardService {
   data: GroupDashboardData | null = null;
   groupIdSelectedByUser = 0;
   isUserAdmin = false;
+  allAppUsers: PublicUser[] = []
 
   constructor(
     private apiService: ApiService,
@@ -103,6 +105,24 @@ export class GroupDashboardService {
     });
   }
 
+  fetchAllAppUsers() {
+    return new Promise((resolve, reject) => {
+      this.apiService.getAllUsersAppRequest().subscribe(
+        (response) => {
+          this.allAppUsers = response;
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getAllAppUsers() {
+    return this.allAppUsers;
+  }
+
   /**
    * Sort tickets history before sending back data
    * @returns Data used to display a group's dashboard
@@ -182,7 +202,8 @@ export class GroupDashboardService {
 
   private checkIfUserIsAdmin() {
     if (this.data && this.data.groupData) {
-      this.isUserAdmin = this.userService.getUserData().id === this.data.groupData.creatorId
+      this.isUserAdmin =
+        this.userService.getUserData().id === this.data.groupData.creatorId;
     }
   }
 }

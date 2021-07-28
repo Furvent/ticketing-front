@@ -9,11 +9,13 @@ import {
   NewGroup,
   NewTicket,
   NewUser,
+  PublicUser,
   TicketData,
   UpdatedTicket,
   UpdatedUser,
   UserData,
 } from 'src/shared/definitions/common';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -91,5 +93,9 @@ export class ApiService {
       `${this.apiTicketingURL}/comment/createGroup`,
       newComment
     );
+  }
+
+  public getAllUsersAppRequest() {
+    return this.httpClient.get<PublicUser[]>(`${this.apiTicketingURL}/private/user-group`);
   }
 }

@@ -37,11 +37,11 @@ export class GroupDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
-      this.isUserGroupAdmin = this.groupService.getIsUserAdmin();
-      this.isLoadingData = false;
-    });
-    // this.mockedConnection();
+    // this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
+    //   this.isUserGroupAdmin = this.groupService.getIsUserAdmin();
+    //   this.isLoadingData = false;
+    // });
+    this.mockedConnection();
   }
 
   mockedConnection() {
