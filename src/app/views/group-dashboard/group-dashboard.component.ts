@@ -20,7 +20,7 @@ export class GroupDashboardComponent implements OnInit {
 
   // TODO: Remove all ref to groupId, and get it in service groupDashboard
   groupIdSelected: number;
-
+  isUserGroupAdmin = false;
   isLoadingData = true;
 
   private mockedUserLoginForm: LoginForm = {
@@ -33,11 +33,12 @@ export class GroupDashboardComponent implements OnInit {
     private groupService: GroupDashboardService,
     private userService: UserService
   ) {
-    this.groupIdSelected = groupService.getGroupIdSelectedByUser();
+    this.groupIdSelected = this.groupService.getGroupIdSelectedByUser();
   }
 
   ngOnInit(): void {
     this.groupService.fetchGroupDashboardData(this.groupIdSelected).then(() => {
+      this.isUserGroupAdmin = this.groupService.getIsUserAdmin();
       this.isLoadingData = false;
     });
     // this.mockedConnection();
@@ -47,6 +48,7 @@ export class GroupDashboardComponent implements OnInit {
     this.groupService.setGroupIdSelectedByUser(1);
     this.userService.login(this.mockedUserLoginForm).then(() => {
       this.groupService.fetchGroupDashboardData(this.mockedGroupId).then(() => {
+        this.isUserGroupAdmin = this.groupService.getIsUserAdmin();
         this.isLoadingData = false;
       });
     });

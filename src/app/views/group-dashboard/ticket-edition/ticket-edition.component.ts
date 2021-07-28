@@ -69,11 +69,6 @@ export class TicketEditionComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  test() {
-    console.log('this.pseudosSelected', this.pseudosSelected.value);
-    console.log("this.selectedStatus", this.selectedStatus);
-  }
-
   getPreSelectedStatus() {
     const statusLabel = this.ticket.history[this.ticket.history.length - 1].label;
     return (statusLabel === TicketStatus.DONE || statusLabel === TicketStatus.CLOSED) ? statusLabel : "";

@@ -56,7 +56,6 @@ export class GroupsListComponent implements OnInit {
   }
 
   enterGroup(groupId: number) {
-    console.log("groupIdSelected in button", groupId);
     this.groupService.setGroupIdSelectedByUser(groupId);
     this.router.navigate(['group-dashboard']);
   }

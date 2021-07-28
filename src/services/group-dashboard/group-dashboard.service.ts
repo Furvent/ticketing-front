@@ -8,15 +8,20 @@ import {
   UpdatedTicket,
 } from 'src/shared/definitions/common';
 import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupDashboardService {
   data: GroupDashboardData | null = null;
-  groupIdSelectedByUser: number = 0;
+  groupIdSelectedByUser = 0;
+  isUserAdmin = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private userService: UserService
+  ) {}
 
   fetchGroupDashboardData(groupId: number) {
     return new Promise((resolve, reject) => {
@@ -24,6 +29,7 @@ export class GroupDashboardService {
         (response) => {
           this.data = response;
           this.sortTicketHistory();
+          this.checkIfUserIsAdmin();
           resolve(true);
         },
         (error) => {
@@ -148,6 +154,10 @@ export class GroupDashboardService {
     return this.groupIdSelectedByUser;
   }
 
+  getIsUserAdmin() {
+    return this.isUserAdmin;
+  }
+
   setGroupIdSelectedByUser(id: number) {
     this.groupIdSelectedByUser = id;
   }
@@ -155,6 +165,7 @@ export class GroupDashboardService {
   resetData() {
     this.data = null;
     this.groupIdSelectedByUser = 0;
+    this.isUserAdmin = false;
   }
 
   private sortTicketHistory() {
@@ -166,6 +177,12 @@ export class GroupDashboardService {
           );
         });
       });
+    }
+  }
+
+  private checkIfUserIsAdmin() {
+    if (this.data && this.data.groupData) {
+      this.isUserAdmin = this.userService.getUserData().id === this.data.groupData.creatorId
     }
   }
 }

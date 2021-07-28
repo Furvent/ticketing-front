@@ -13,7 +13,7 @@
         <h3>{{ ticket.title }}</h3>
         <div class="ticketing-all-tickets-ticket-buttons-container">
           <button mat-flat-button color="primary" (click)="openTicketDetailsDialog(ticket)">Details</button>
-          <button mat-flat-button color="accent" (click)="openEditTicketDialog(ticket)">Edit</button>
+          <button *ngIf="isUserGroupAdmin" mat-flat-button color="accent" (click)="openEditTicketDialog(ticket)">Edit</button>
         </div>
       </div>
     </div>
