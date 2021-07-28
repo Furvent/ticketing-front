@@ -1,0 +1,17 @@
+.ticketing-profile-container {
+    width: 800px;
+    margin: auto;
+  }
+  
+  .ticketing-profile-progress-bar {
+    margin-top: 5rem;
+  }
+  .ticketing-profile-items {
+    display: flex;
+    //justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .ticketing-profile-item {
+    padding-top: 150px
+  }
