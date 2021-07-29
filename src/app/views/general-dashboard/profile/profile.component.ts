@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { cloneDeep } from 'lodash';
 import { UserService } from 'src/services/user/user.service';
 import { UserData } from 'src/shared/definitions/common';
 import { UpdatedUser } from 'src/shared/definitions/common';

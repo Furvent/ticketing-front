@@ -21,7 +21,7 @@
     <mat-tab label="Group discussion">
       <app-group-comments></app-group-comments>
     </mat-tab>
-    <mat-tab label="Group options" *ngIf="isUserGroupAdmin">
+    <mat-tab label="Group administration" *ngIf="isUserGroupAdmin">
       <app-admin-options (refresh)="refreshMyTickets()"></app-admin-options>
     </mat-tab>
   </mat-tab-group>

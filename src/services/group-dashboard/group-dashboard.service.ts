@@ -119,6 +119,19 @@ export class GroupDashboardService {
     });
   }
 
+  addUserOnGroup(userId: number) {
+    return new Promise((resolve, reject) => {
+      this.apiService.addUserOnGroupRequest({userId, groupId: this.groupIdSelectedByUser}).subscribe(
+        () => {
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
   getAllAppUsers() {
     return this.allAppUsers;
   }
@@ -174,12 +187,12 @@ export class GroupDashboardService {
     return this.groupIdSelectedByUser;
   }
 
-  getIsUserAdmin() {
-    return this.isUserAdmin;
-  }
-
   setGroupIdSelectedByUser(id: number) {
     this.groupIdSelectedByUser = id;
+  }
+
+  getIsUserAdmin() {
+    return this.isUserAdmin;
   }
 
   resetData() {

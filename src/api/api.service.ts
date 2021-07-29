@@ -14,8 +14,8 @@ import {
   UpdatedTicket,
   UpdatedUser,
   UserData,
+  UserIdGroupIdForm,
 } from 'src/shared/definitions/common';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -97,5 +97,12 @@ export class ApiService {
 
   public getAllUsersAppRequest() {
     return this.httpClient.get<PublicUser[]>(`${this.apiTicketingURL}/private/user-group`);
+  }
+
+  public addUserOnGroupRequest(userIdGroupId: UserIdGroupIdForm) {
+    return this.httpClient.post(
+      `${this.apiTicketingURL}/private/user-group/add-user`,
+      userIdGroupId
+    )
   }
 }

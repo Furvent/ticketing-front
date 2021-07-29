@@ -1,8 +1,31 @@
 <div class="ticketing-add-user-container">
   <!-- List des utilisateurs actuels du groupe -->
-  <ul>
-    <li *ngFor="let user of usersGroup"></li>
-  </ul>
+  <div class="ticketing-display-users-container">
+    <h2>Users on project:</h2>
+    <ul class="ticketing-list-users-container">
+      <li *ngFor="let user of usersGroup">
+        <span>{{ user.pseudo }} </span>
+      </li>
+    </ul>
+  </div>
   <!-- Select avec tous les utilisateurs de l'app -->
-  <!-- bouton entré -->
+  <div class="ticketing-add-user-select-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Select user</mat-label>
+      <mat-select [(ngModel)]="userSelected" name="user">
+        <mat-option *ngFor="let user of usersAddable" [value]="user">
+          {{ user.pseudo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      class="ticketing-add-user-button"
+      mat-flat-button
+      color="primary"
+      (click)="addUserOnGroup()"
+      [disabled]="!userSelected"
+    >
+      Add <span *ngIf="userSelected"> {{ userSelected.pseudo }} </span>
+    </button>
+  </div>
 </div>

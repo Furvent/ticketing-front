@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { PublicUser } from 'src/shared/definitions/common';
+
+import { differenceWith } from 'lodash';
 
 @Component({
   selector: 'app-add-user-group',
@@ -11,24 +12,43 @@ import { PublicUser } from 'src/shared/definitions/common';
 export class AddUserGroupComponent implements OnInit {
   usersGroup: PublicUser[] = [];
   appAllUsers: PublicUser[] = [];
-  pseudosSelected: FormControl;
-  groupUserPseudoSelectOptions: String[] = [];
-  constructor(private groupService: GroupDashboardService) {
-    this.pseudosSelected = new FormControl();
-  }
+  usersAddable: PublicUser[] = [];
+
+  userSelected!: PublicUser;
+  // groupUserPseudoSelectOptions: String[] = [];
+  constructor(private groupService: GroupDashboardService) {}
 
   ngOnInit(): void {
+    this.getAppAllUsersAndSetUsersAddable();
+  }
+
+  getAppAllUsersAndSetUsersAddable() {
     this.usersGroup = this.groupService.getAllGroupUsers();
     this.groupService.fetchAllAppUsers().then(() => {
       this.appAllUsers = this.groupService.getAllAppUsers();
-    })
-  }
-
-  getSelectedUser() {
-    return this.appAllUsers.filter((user) => {
-      return this.pseudosSelected.value.find(
-        (pseudo: string) => user.pseudo === pseudo
+      this.usersAddable = differenceWith(
+        this.appAllUsers,
+        this.usersGroup,
+        (userA, userB) => userA.id === userB.id
       );
     });
   }
+
+  addUserOnGroup() {
+    this.groupService.addUserOnGroup(this.userSelected.id).then(() => {
+      this.groupService
+        .fetchGroupDashboardData(this.groupService.getGroupIdSelectedByUser())
+        .then(() => {
+          this.getAppAllUsersAndSetUsersAddable();
+        });
+    });
+  }
+
+  // getSelectedUser() {
+  //   return this.appAllUsers.filter((user) => {
+  //     return this.pseudosSelected.value.find(
+  //       (pseudo: string) => user.pseudo === pseudo
+  //     );
+  //   });
+  // }
 }
