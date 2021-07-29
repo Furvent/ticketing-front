@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { cloneDeep } from 'lodash';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { UserData } from 'src/shared/definitions/common';

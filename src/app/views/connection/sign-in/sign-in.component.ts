@@ -12,6 +12,8 @@ export class SignInComponent {
   username: string = '';
   password: string = '';
 
+  flagDisableSignIn = true;
+
   constructor(private userService: UserService, private router: Router) {}
 
   signIn() {
@@ -26,5 +28,9 @@ export class SignInComponent {
     ).catch(error => {
       console.error("Error when signIn: ", error);
     });
+  }
+
+  onEnter() {
+    this.flagDisableSignIn = this.username.trim() === '' || this.password.trim() === ''
   }
 }

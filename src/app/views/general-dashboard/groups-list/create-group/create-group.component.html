@@ -2,10 +2,17 @@
 
 <mat-form-field class="" appearance="fill">
   <mat-label>Group's name</mat-label>
-  <input type="text" matInput [(ngModel)]="name"/>
+  <input type="text" matInput [(ngModel)]="name" (keyup)="onEnter()"/>
 </mat-form-field>
 
 <mat-dialog-actions class="ticketing-create-group-actions-container">
-  <button class="mat-raised-button" (click)="close()">Cancel</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Create</button>
+  <button mat-raised-button color="accent" (click)="close()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="flagDisableCreateGroup"
+  >
+    Create
+  </button>
 </mat-dialog-actions>

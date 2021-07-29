@@ -17,6 +17,7 @@ export class TicketEditionComponent implements OnInit {
   pseudosSelected: FormControl;
   selectedStatus: string;
   selectableStatus: String[];
+  flagDisableModif = true;
 
   constructor(
     private dialogRef: MatDialogRef<TicketEditionComponent>,
@@ -34,6 +35,7 @@ export class TicketEditionComponent implements OnInit {
     } else {
       this.selectedStatus = this.getPreSelectedStatus();
     }
+    this.checkFlagDisableModif();
   }
 
   ngOnInit(): void {
@@ -67,11 +69,6 @@ export class TicketEditionComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  test() {
-    console.log('this.pseudosSelected', this.pseudosSelected.value);
-    console.log("this.selectedStatus", this.selectedStatus);
-  }
-
   getPreSelectedStatus() {
     const statusLabel = this.ticket.history[this.ticket.history.length - 1].label;
     return (statusLabel === TicketStatus.DONE || statusLabel === TicketStatus.CLOSED) ? statusLabel : "";
@@ -81,6 +78,10 @@ export class TicketEditionComponent implements OnInit {
     return this.data.groupUsers.filter(user => {
       return this.pseudosSelected.value.find((pseudo: string) => user.pseudo === pseudo);
     })
+  }
+
+  checkFlagDisableModif() {
+    this.flagDisableModif = this.ticket.title.trim() === '' || this.ticket.description.trim() === '' 
   }
 }
 

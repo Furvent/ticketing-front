@@ -40,9 +40,7 @@ export class GeneralDashboardService {
       const creatorId = this.userService.getUserData().id;
       if (creatorId !== undefined) {
         this.apiService.addGroupRequest({ name, creatorId }).subscribe((response) => {
-          console.log("response after create group", response)
           this.data.groupsData.push(response);
-          console.log("this.data.groupsData after create group", this.data.groupsData)
           resolve(true);
         }, (error) => {
           reject(error);

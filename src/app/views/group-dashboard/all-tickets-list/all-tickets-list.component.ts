@@ -19,6 +19,7 @@ import { TicketDetailsData, TicketDetailsModalComponent } from '../ticket-detail
 })
 export class AllTicketsListComponent implements OnInit {
   groupIdSelected: number;
+  isUserGroupAdmin = false;
   allTickets: TicketData[] = [];
 
   openedTickets: TicketData[] = [];
@@ -36,6 +37,7 @@ export class AllTicketsListComponent implements OnInit {
   ) {
     this.ticketStatusLabels = getAllStatus();
     this.groupIdSelected = this.groupService.getGroupIdSelectedByUser();
+    this.isUserGroupAdmin = groupService.getIsUserAdmin();
   }
 
   ngOnInit(): void {
