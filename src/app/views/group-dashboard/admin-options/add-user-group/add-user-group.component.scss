@@ -1,4 +1,6 @@
 .ticketing-add-user-container {
+  display: flex;
+  flex-direction: column;
   margin-left: 0.5rem;
 }
 
@@ -8,6 +10,7 @@
 
 .ticketing-list-users-container {
   margin-top: 5px;
+  margin-left: 1rem;
 }
 
 .ticketing-add-user-select-container {

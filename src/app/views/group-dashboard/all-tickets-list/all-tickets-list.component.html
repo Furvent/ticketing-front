@@ -1,21 +1,39 @@
 <div class="ticketing-all-tickets-main-container">
-  <section
-    class="ticketing-label-container"
-    *ngFor="let label of ticketStatusLabels"
-  >
-    <h2 class="ticketing-all-tickets-label-title">{{ label | uppercase }}</h2>
-    <div class="ticketing-horizontal-line"></div>
-    <div class="ticketing-all-ticket-label-tickets-container">
-      <div
-        class="ticketing-all-tickets-ticket-container"
-        *ngFor="let ticket of getTicketsByLastLabel(label)"
-      >
-        <h3>{{ ticket.title }}</h3>
-        <div class="ticketing-all-tickets-ticket-buttons-container">
-          <button mat-flat-button color="primary" (click)="openTicketDetailsDialog(ticket)">Details</button>
-          <button *ngIf="isUserGroupAdmin" mat-flat-button color="accent" (click)="openEditTicketDialog(ticket)">Edit</button>
+  <mat-slide-toggle color="primary" [(ngModel)]="flagShowUserTicket" (change)="toggleShowUserTicket()">
+    Only show your tickets
+  </mat-slide-toggle>
+  <div class="ticketing-all-tickets-container">
+    <section
+      class="ticketing-label-container"
+      *ngFor="let label of ticketStatusLabels"
+    >
+      <h2 class="ticketing-all-tickets-label-title">{{ label | uppercase }}</h2>
+      <div class="ticketing-horizontal-line"></div>
+      <div class="ticketing-all-ticket-label-tickets-container">
+        <div
+          class="ticketing-all-tickets-ticket-container"
+          *ngFor="let ticket of getTicketsByLastLabel(label)"
+        >
+          <h3>{{ ticket.title }}</h3>
+          <div class="ticketing-all-tickets-ticket-buttons-container">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="openTicketDetailsDialog(ticket)"
+            >
+              Details
+            </button>
+            <button
+              *ngIf="isUserGroupAdmin"
+              mat-flat-button
+              color="accent"
+              (click)="openEditTicketDialog(ticket)"
+            >
+              Edit
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </div>

@@ -11,6 +11,7 @@ import {
 import { cloneDeep } from 'lodash';
 import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
 import { TicketDetailsData, TicketDetailsModalComponent } from '../ticket-details-modal/ticket-details-modal.component';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-all-tickets-list',
@@ -19,7 +20,9 @@ import { TicketDetailsData, TicketDetailsModalComponent } from '../ticket-detail
 })
 export class AllTicketsListComponent implements OnInit {
   groupIdSelected: number;
+  userId: number;
   isUserGroupAdmin = false;
+  flagShowUserTicket = false;
   allTickets: TicketData[] = [];
 
   openedTickets: TicketData[] = [];
@@ -32,9 +35,11 @@ export class AllTicketsListComponent implements OnInit {
   @Output() refresh = new EventEmitter();
 
   constructor(
+    private userService: UserService,
     private groupService: GroupDashboardService,
     private dialog: MatDialog
   ) {
+    this.userId = this.userService.getUserData().id;
     this.ticketStatusLabels = getAllStatus();
     this.groupIdSelected = this.groupService.getGroupIdSelectedByUser();
     this.isUserGroupAdmin = groupService.getIsUserAdmin();
@@ -124,5 +129,14 @@ export class AllTicketsListComponent implements OnInit {
           this.refresh.emit();
         });
     });
+  }
+
+  toggleShowUserTicket() {
+    if(this.flagShowUserTicket) {
+      this.allTickets = this.groupService.getAllTicketsWithUserId(this.userId);
+    } else {
+      this.allTickets = this.groupService.getAllTickets();
+    }
+    this.sortTicketsByLastStatus();
   }
 }
