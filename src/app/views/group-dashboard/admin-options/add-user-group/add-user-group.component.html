@@ -25,7 +25,8 @@
       (click)="addUserOnGroup()"
       [disabled]="!userSelected"
     >
-      Add <span *ngIf="userSelected"> {{ userSelected.pseudo }} </span>
+      <span>Add </span
+      ><span *ngIf="userSelected"> {{ userSelected.pseudo }} </span>
     </button>
   </div>
 </div>

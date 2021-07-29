@@ -2,12 +2,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .ticketing-ticket-details-modal-ticket {
-  width: 20rem;
+  width: 40rem;
 }
 
 .ticketing-ticket-details-modal-button {
+  width: 20%;
   margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }

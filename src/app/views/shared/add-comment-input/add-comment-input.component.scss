@@ -1,15 +1,14 @@
 .ticketing-add-comment-input-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .ticketing-add-comment-inputfield {
   width: 13rem;
-  margin: auto;
   margin-top: 1rem;
 }
 
 .ticketing-add-comment-input-button {
+  margin-left: 1rem;
   height: 3rem;
 }

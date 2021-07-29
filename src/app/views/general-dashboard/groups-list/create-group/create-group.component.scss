@@ -1,4 +1,16 @@
 .ticketing-create-group-actions-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.ticketing-create-group-content-container {
+  margin: 1rem;
+}
+
+.ticketing-create-group-main-container {
+  width: 15rem;
+}
+
+.ticketing-create-group-input {
+  width: 100%;
 }

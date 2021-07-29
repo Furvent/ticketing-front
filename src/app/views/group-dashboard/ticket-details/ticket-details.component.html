@@ -1,34 +1,60 @@
-<mat-card class="ticketing-ticket-details-main-container">
-  <h1 class="ticketing-ticket-details-main-title">
+<div class="ticketing-ticket-details-main-container">
+  <h2 class="ticketing-ticket-details-main-title mat-dialog-title">
     {{ ticket.title | uppercase }}
-  </h1>
+  </h2>
+  <div class="ticketing-ticket-details-content-container">
+    <div class="ticketing-ticket-details-left-side">
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>home</mat-icon>
+          <span class="ticketing-sub-title">Details</span>
+        </h3>
+      </div>
+      <p>
+        {{ ticket.description }}
+      </p>
 
-  <mat-card-content>
-    <h2 class="ticketing-ticket-details-sub-title">Details</h2>
-    <p>
-      {{ ticket.description }}
-    </p>
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>people</mat-icon>
+          <span class="ticketing-sub-title">Working on</span>
+        </h3>
+      </div>
+      <p *ngIf="ticket.usersOnTask.length <= 0">
+        No user on task
+      </p>
+      <p *ngFor="let user of ticket.usersOnTask">
+        <span>{{ user.pseudo | titlecase }} </span>
+      </p>
 
-    <h2 class="ticketing-ticket-details-sub-title">Working On</h2>
-    <p *ngFor="let user of ticket.usersOnTask">
-      <span>{{ user.pseudo }} </span>
-    </p>
-
-    <h2 class="ticketing-ticket-details-sub-title">History</h2>
-    <p *ngFor="let status of ticket.history">
-      <span>{{ status.label }} </span
-      ><span class="ticketing-ticket-details-history-date">
-        {{ status.date | date }}</span
-      >
-    </p>
-
-    <div *ngIf="flagDisplayTicketComment">
-      <h2 class="ticketing-ticket-details-sub-title">Comments</h2>
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>history</mat-icon>
+          <span class="ticketing-sub-title">History</span>
+        </h3>
+      </div>
+      <p *ngFor="let status of ticket.history">
+        <span>{{ status.label }} </span
+        ><span class="ticketing-ticket-details-history-date">
+          {{ status.date | date }}</span
+        >
+      </p>
+    </div>
+    <div
+      class="ticketing-ticket-details-comments-side"
+      *ngIf="flagDisplayTicketComment"
+    >
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>comment</mat-icon>
+          <span class="ticketing-sub-title">Comments</span>
+        </h3>
+      </div>
       <p
         class="ticketing-ticket-details-comments-container"
         *ngFor="let comment of ticket.commentsToDisplay"
       >
-        <span>{{ comment.author }} </span
+        <span class="mat-body-2">{{ comment.author | titlecase }} </span
         ><span class="ticketing-ticket-details-comments-date">{{
           comment.creationDate | date
         }}</span
@@ -41,5 +67,5 @@
         [entityType]="ticketEntity"
       ></app-add-comment-input>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

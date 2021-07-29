@@ -2,3 +2,19 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ticketing-modal-background-color {
+  box-sizing: border-box;
+  background-color: rgb(248, 248, 246);
+}
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-dialog-title {
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #673ab7;
+  color: white;
+}

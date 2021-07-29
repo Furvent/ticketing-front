@@ -15,10 +15,12 @@
 
 .ticketing-add-user-select-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .ticketing-add-user-button {
+  width: 10rem;
   margin-left: 1rem;
   margin-bottom: 1rem;
   padding-top: 0.5rem;
