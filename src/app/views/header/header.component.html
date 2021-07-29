@@ -1,6 +1,20 @@
-<mat-toolbar color="primary">
-  <span>Welcome to Ticketing {{ getUserPseudo() | titlecase }}</span>
-  <button mat-button color="accent">Profile</button>
-  <button *ngIf="flagDisplayButtonBackToGeneralDashboard" class="ticketing-header-right-buttons" mat-button color="accent" (click)="backToGeneralDashboard()">Your groups</button>
-  <button [ngClass]="{'ticketing-header-right-buttons': !flagDisplayButtonBackToGeneralDashboard}" mat-button color="accent" (click)="logout()">Logout</button>
-</mat-toolbar>
+<header>
+  <mat-toolbar color="primary">
+    <span>Welcome to Ticketing {{ getUserPseudo() | titlecase }}</span>
+    <button mat-button color="accent" (click)=toggleDisplayProfileDiv()>Profile</button>
+    <!--
+    <button mat-button color="accent" [matMenuTriggerFor]="profile">Profile</button>
+    <mat-menu #profile="matMenu">
+      <app-profile></app-profile>
+    </mat-menu>
+    -->
+    <button *ngIf="flagDisplayButtonBackToGeneralDashboard" class="ticketing-header-right-buttons" mat-button color="accent" (click)="backToGeneralDashboard()">Your groups</button>
+    <button [ngClass]="{'ticketing-header-right-buttons': !flagDisplayButtonBackToGeneralDashboard}" mat-button color="accent" (click)="logout()">Logout</button>
+  
+
+  </mat-toolbar>
+<!--[hidden]= "isShowProfileDiv"-->
+  <div class="profile-menu-div" [@heightGrow]="state" >
+    <app-profile></app-profile>
+  </div>
+</header>

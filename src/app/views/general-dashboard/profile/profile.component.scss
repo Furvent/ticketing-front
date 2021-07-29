@@ -1,17 +1,40 @@
 .ticketing-profile-container {
-    width: 800px;
+    //width: 800px;
     margin: auto;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
   }
   
-  .ticketing-profile-progress-bar {
+.ticketing-profile-progress-bar {
     margin-top: 5rem;
   }
-  .ticketing-profile-items {
+
+.ticketing-profile-items {
     display: flex;
     //justify-content: space-between;
     flex-direction: column;
+    padding-left: 2rem;
   }
 
-  .ticketing-profile-item {
-    padding-top: 150px
+.ticketing-profile-item {
+    color: blue;
   }
+
+.ticketing-profile-item-span {
+    //color: red;
+  }
+
+.ticketing-profile-button-container {
+    padding-left: 2rem;
+  }
+.ticketing-profile-button {
+    height: 50%;
+    align-self: center;
+    margin-left: 3rem;
+  }
+.ticketing-profile-subcontainer {
+  display: flex;
+  flex-direction: row;
+}
+  

@@ -2,14 +2,12 @@
     <header class="ticketing-header-profile"> 
         <h1>Your profile</h1>
     </header>
-
-    <div class=ticketing-profile-items>
-        <p><span class="tiketing-profile-item">Current public identifier: </span>{{userData.pseudo}}</p>
-        <p><span class="tiketing-profile-item">Login : </span>{{userData.username}}</p>
+    <div class="ticketing-profile-subcontainer">
+        <div class=ticketing-profile-items>
+            <label class="ticketing-profile-item"><span class="ticketing-profile-item-span">Pseudo: </span>{{userData.pseudo}}</label>
+            <label class="ticketing-profile-item"><span class="ticketing-profile-item-span">Login : </span>{{userData.username}}</label>
+        </div>
+        <button mat-flat-button color="accent" class="ticketing-profile-button" (click)="openEditProfileDialog(userData)">Edit profile</button>
     </div>
-
-    <div class="ticketing-profile-button-container">
-        <p><span class="tiketing-profile-item">You may update your public identifier or password</span></p>
-        <button mat-flat-button color="accent" (click)="openEditProfileDialog(userData)">Edit profile</button>
-      </div>
+   
 </div>

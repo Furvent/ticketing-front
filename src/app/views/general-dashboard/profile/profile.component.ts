@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
 import { UserData } from 'src/shared/definitions/common';
 import { UpdatedUser } from 'src/shared/definitions/common';
@@ -12,12 +13,14 @@ import { ProfilEditionComponent } from './profil-edition/profil-edition.componen
 })
 export class ProfileComponent implements OnInit {
 
+  @Output() refresh = new EventEmitter();
   public userData;
   public updatedUser : UpdatedUser;
 
   constructor(
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private groupService: GroupDashboardService
     ) {
       this.userData = userService.getUserData();
       this.updatedUser = {
@@ -60,6 +63,14 @@ export class ProfileComponent implements OnInit {
       updateProfile(updatedUser: UpdatedUser){
         this.userService.updateUser(updatedUser).then(() => {
           this.userData = this.userService.getUserData();
-        })
+          /*
+          this.groupService
+          .fetchGroupDashboardData(this.groupIdSelected)
+          .then(() => {
+            this.allTickets = this.groupService.getAllTickets();
+            this.sortTicketsByLastStatus();
+            this.refresh.emit();
+          });*/
+      });
       }
 }
