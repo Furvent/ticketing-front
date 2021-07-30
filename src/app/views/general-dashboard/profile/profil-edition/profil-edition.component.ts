@@ -9,6 +9,7 @@ import { UpdatedUser } from 'src/shared/definitions/common';
 })
 export class ProfilEditionComponent implements OnInit {
     data : UpdatedUser
+    flagDisableSignIn = true;
 
   constructor(
     private dialogRef: MatDialogRef<ProfilEditionComponent>,
@@ -32,5 +33,10 @@ export class ProfilEditionComponent implements OnInit {
       this.data.oldPassword = "";
       this.data.newPassword = "";
       this.dialogRef.close();
+    }
+
+    onEnter() {
+      this.flagDisableSignIn = this.data.newPseudo.trim() === '' 
+      && (this.data.newPassword.trim() === '' || this.data.oldPassword.trim() === '')
     }
 }
