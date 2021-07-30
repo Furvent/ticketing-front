@@ -54,6 +54,6 @@ export class GroupDashboardComponent implements OnInit {
   // Temporary, will change with Observable
   refreshMyTickets() {
     this.myTicketsComponent.getMyTickets();
-    this.allTicketscomponent.getTickets();
+    this.allTicketscomponent.getTicketsAndSortedThem();
   }
 }

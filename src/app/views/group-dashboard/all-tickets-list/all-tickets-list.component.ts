@@ -9,7 +9,6 @@ import {
   TicketEditionData,
 } from '../ticket-edition/ticket-edition.component';
 import { cloneDeep } from 'lodash';
-import { TicketDetailsComponent } from '../ticket-details/ticket-details.component';
 import { TicketDetailsData, TicketDetailsModalComponent } from '../ticket-details-modal/ticket-details-modal.component';
 
 @Component({
@@ -39,14 +38,18 @@ export class AllTicketsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTickets();
+    this.getTicketsAndSortedThem();
+    
   }
 
-  getTickets() {
+  getTicketsAndSortedThem() {
     this.allTickets = this.groupService.getAllTickets();
     this.sortTicketsByLastStatus();
   }
 
+  /**
+   * TODO: Refacto into switch
+   */
   sortTicketsByLastStatus() {
     this.openedTickets = this.allTickets.filter(
       (ticket) => this.getLastTicketStatus(ticket) === TicketStatus.OPENED

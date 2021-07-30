@@ -72,6 +72,7 @@ export class TicketEditionComponent implements OnInit {
     console.log("this.selectedStatus", this.selectedStatus);
   }
 
+  // Todo : à améliorer il me semble
   getPreSelectedStatus() {
     const statusLabel = this.ticket.history[this.ticket.history.length - 1].label;
     return (statusLabel === TicketStatus.DONE || statusLabel === TicketStatus.CLOSED) ? statusLabel : "";
@@ -107,7 +108,7 @@ export class TicketEditionData {
     this.groupUsers = groupUsers;
   }
 }
-
+// Caca ça !
 export class TicketAfterEditionData {
   updatedTicket: UpdatedTicket | undefined;
   newTicket: NewTicket | undefined;
