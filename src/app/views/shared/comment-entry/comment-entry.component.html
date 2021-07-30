@@ -1,0 +1,10 @@
+<div class="ticketing-comment-container" [ngClass]="{'ticketing-user-comment': isCommentWroteByUser()}">
+  <div class="ticketing-comment-header-container">
+    <span class="mat-body-2">{{ comment.author | titlecase }} </span>
+    <span class="ticketing-comment-date">{{
+      comment.creationDate | date:'medium'
+    }}</span>
+  </div>
+
+  <span>{{ comment.text }} </span>
+</div>

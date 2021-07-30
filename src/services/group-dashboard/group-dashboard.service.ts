@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'src/api/api.service';
 import {
+  Comment,
   GroupDashboardData,
   NewComment,
   NewTicket,
+  PublicUser,
   UpdatedTicket,
 } from 'src/shared/definitions/common';
+import { EntityTypeComment } from 'src/shared/enums/entity-type-comment';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupDashboardService {
   data: GroupDashboardData | null = null;
-  groupIdSelectedByUser: number = 0;
+  groupIdSelectedByUser = 0;
+  isUserAdmin = false;
+  allAppUsers: PublicUser[] = []
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private userService: UserService
+  ) {}
 
   fetchGroupDashboardData(groupId: number) {
     return new Promise((resolve, reject) => {
@@ -22,6 +31,7 @@ export class GroupDashboardService {
         (response) => {
           this.data = response;
           this.sortTicketHistory();
+          this.checkIfUserIsAdmin();
           resolve(true);
         },
         (error) => {
@@ -70,6 +80,18 @@ export class GroupDashboardService {
     });
   }
 
+  addCommentOnEntity(newComment: NewComment, entityType: EntityTypeComment) {
+    if (entityType === EntityTypeComment.GROUP) {
+      return this.addCommentOnGroup(newComment);
+    } else if (entityType === EntityTypeComment.TICKET) {
+      return this.addCommentOnTicket(newComment);
+    } else {
+      return new Promise((reject) => {
+        reject('Wrong entity type');
+      });
+    }
+  }
+
   addCommentOnGroup(newComment: NewComment) {
     return new Promise((resolve, reject) => {
       this.apiService.addGroupCommentRequest(newComment).subscribe(
@@ -81,6 +103,37 @@ export class GroupDashboardService {
         }
       );
     });
+  }
+
+  fetchAllAppUsers() {
+    return new Promise((resolve, reject) => {
+      this.apiService.getAllUsersAppRequest().subscribe(
+        (response) => {
+          this.allAppUsers = response;
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  addUserOnGroup(userId: number) {
+    return new Promise((resolve, reject) => {
+      this.apiService.addUserOnGroupRequest({userId, groupId: this.groupIdSelectedByUser}).subscribe(
+        () => {
+          resolve(true);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getAllAppUsers() {
+    return this.allAppUsers;
   }
 
   /**
@@ -115,19 +168,37 @@ export class GroupDashboardService {
   getAllTicketsWithUserId(userId: number) {
     if (this.data && this.data.ticketsData.length > 0) {
       return this.data.ticketsData.filter((ticket) =>
-        ticket.usersOnTask.find((user) => (user.id === userId))
+        ticket.usersOnTask.find((user) => user.id === userId)
       );
     } else {
       return [];
     }
   }
 
+  getGroupComments(): Comment[] {
+    if (this.data && this.data.commentsToDisplay.length > 0) {
+      return this.data.commentsToDisplay;
+    } else {
+      return [];
+    }
+  }
+
   getGroupIdSelectedByUser() {
-   return this.groupIdSelectedByUser;
+    return this.groupIdSelectedByUser;
   }
 
   setGroupIdSelectedByUser(id: number) {
     this.groupIdSelectedByUser = id;
+  }
+
+  getIsUserAdmin() {
+    return this.isUserAdmin;
+  }
+
+  resetData() {
+    this.data = null;
+    this.groupIdSelectedByUser = 0;
+    this.isUserAdmin = false;
   }
 
   private sortTicketHistory() {
@@ -139,6 +210,13 @@ export class GroupDashboardService {
           );
         });
       });
+    }
+  }
+
+  private checkIfUserIsAdmin() {
+    if (this.data && this.data.groupData) {
+      this.isUserAdmin =
+        this.userService.getUserData().id === this.data.groupData.creatorId;
     }
   }
 }

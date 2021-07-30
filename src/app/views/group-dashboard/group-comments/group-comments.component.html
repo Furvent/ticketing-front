@@ -1,0 +1,10 @@
+<div class="ticketing-group-comments-container">
+  <app-comment-entry *ngFor="let comment of groupComments" [comment]="comment" [userPseudo]="userPseudo">
+  </app-comment-entry>
+  <app-add-comment-input
+  class="ticketing-group-comments-input-container"
+  [entityComments]="groupComments"
+  [entityId]="getGroupSelectedId()"
+  [entityType]="groupEntity"
+></app-add-comment-input>
+</div>

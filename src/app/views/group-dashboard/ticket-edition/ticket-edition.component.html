@@ -1,11 +1,11 @@
-<div class="ticketing-ticket-edition-main-container">
+<div class="ticketing-ticket-edition-main-container ticketing-modal-background-color">
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's title</mat-label>
-    <input type="text" matInput [(ngModel)]="ticket.title" />
+    <input type="text" matInput [(ngModel)]="ticket.title" (keyup)="checkFlagDisableModif()"/>
   </mat-form-field>
   <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
     <mat-label>Ticket's description</mat-label>
-    <textarea matInput [(ngModel)]="ticket.description"></textarea>
+    <textarea matInput [(ngModel)]="ticket.description" (keyup)="checkFlagDisableModif()"></textarea>
   </mat-form-field>
   <div>
     <h3>Add user(s) on task</h3>
@@ -37,7 +37,7 @@
     </mat-radio-group>
   </div>
   <div class="ticket-ticket-edition-buttons-container">
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="flagDisableModif">Submit</button>
     <button mat-raised-button color="warn" (click)="goBack()">Go back</button>
-    <button mat-raised-button color="primary" (click)="submit()">Submit</button>
   </div>
 </div>

@@ -1,0 +1,25 @@
+.ticketing-comment-container {
+  width: 35rem;
+  padding: 1rem;
+  justify-content: space-around;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  background-color: bisque;
+  border-radius: 25px;
+}
+
+.ticketing-comment-date {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  align-self: flex-end;
+}
+
+.ticketing-comment-header-container {
+  display: flex;
+  justify-content: space-between
+}
+
+.ticketing-user-comment {
+  margin-left: 2rem;
+  background-color: cadetblue;
+}

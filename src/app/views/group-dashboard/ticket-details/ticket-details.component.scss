@@ -3,6 +3,15 @@
   flex-direction: column;
 }
 
+.ticketing-ticket-details-content-container {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.ticketing-ticket-details-left-side {
+  min-width: 40%;
+}
+
 .ticketing-ticket-details-comments-container {
   justify-content: space-around;
 }
@@ -19,27 +28,15 @@
 }
 
 .ticketing-ticket-details-main-title {
-  color: dodgerblue;
   text-align: center;
 }
 
 .ticketing-ticket-details-sub-title {
-  color: dodgerblue;
   margin-bottom: 0rem;
-}
-
-.ticketing-ticket-details-comment-input-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
-.ticketing-ticket-details-comment-inputfield {
-  width: 13rem;
-  margin: auto;
-  margin-top: 1rem;
-}
-
-.ticketing-ticket-details-comment-input-button {
-  height: 3rem;
+.ticketing-sub-title {
+  margin-left: 0.5rem;
 }

@@ -91,3 +91,8 @@ export type Comment = {
   author: string;
 	creationDate: string;
 }
+
+export type UserIdGroupIdForm = {
+  userId: number;
+  groupId: number;
+}

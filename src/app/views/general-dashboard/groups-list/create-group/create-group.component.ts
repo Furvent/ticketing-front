@@ -7,15 +7,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./create-group.component.scss'],
 })
 export class CreateGroupComponent {
+  name = '';
 
-  name: string;
+  flagDisableCreateGroup = true;
 
-  constructor(
-    private dialogRef: MatDialogRef<CreateGroupComponent>,
-    @Inject(MAT_DIALOG_DATA) data: any
-  ) {
-    this.name = data.name;
-  }
+  constructor(private dialogRef: MatDialogRef<CreateGroupComponent>) {}
 
   save() {
     this.dialogRef.close(this.name);
@@ -23,5 +19,9 @@ export class CreateGroupComponent {
 
   close() {
     this.dialogRef.close();
+  }
+
+  onEnter() {
+    this.flagDisableCreateGroup = this.name.trim() === '';
   }
 }

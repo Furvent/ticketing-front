@@ -1,1 +1,24 @@
-<p>profil-edition works!</p>
+<div class="ticketing-profile-edition-container">
+    <header class="ticketing-header-profile-edition"> 
+        <h1>Your profile</h1>
+    </header>
+
+    <div class=ticketing-profile-edition-items>
+        <p><span class="tiketing-profile-edition-item">Login : </span>{{data.username}}</p>
+
+        <p>Update your public identifier</p>
+        <input type="text" id="newPseudo" name="newPseudo" [(ngModel)]="data.newPseudo"/>
+
+        <p>Update your password</p>
+        <input type="text" id="newPassword" name="newPassword" [(ngModel)]="data.newPassword"/>
+
+        <p>Input your current password in case of a change in password</p>
+        <input type="text" id="oldPassword" name="oldPassword" [(ngModel)]="data.oldPassword"/>
+        
+    </div>
+    <div class="profile-edition-buttons-container">
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+        <button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+      </div>
+
+</div>

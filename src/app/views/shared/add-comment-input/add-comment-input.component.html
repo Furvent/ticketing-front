@@ -1,0 +1,7 @@
+<div class="ticketing-add-comment-input-container">
+  <mat-form-field class="ticketing-add-comment-inputfield" appearance="fill">
+    <mat-label>New comment</mat-label>
+    <textarea type="text" matInput placeholder="What's in your mind?" [(ngModel)]="commentInputText" (keyup)="onEnter()"></textarea>
+  </mat-form-field>
+  <button class="ticketing-add-comment-input-button" mat-raised-button color="primary" (click)="sendComment()" [disabled]="flagDisableSend">Send</button>
+</div>

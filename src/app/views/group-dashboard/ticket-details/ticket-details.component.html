@@ -1,49 +1,71 @@
-<mat-card class="ticketing-ticket-details-main-container">
-  <h1 class="ticketing-ticket-details-main-title">
+<div class="ticketing-ticket-details-main-container">
+  <h2 class="ticketing-ticket-details-main-title mat-dialog-title">
     {{ ticket.title | uppercase }}
-  </h1>
-
-  <mat-card-content>
-    <h2 class="ticketing-ticket-details-sub-title">Details</h2>
-    <p>
-      {{ ticket.description }}
-    </p>
-
-    <h2 class="ticketing-ticket-details-sub-title">Working On</h2>
-      <p *ngFor="let status of ticket.usersOnTask">
-        <span>{{ status.pseudo }} </span>
+  </h2>
+  <div class="ticketing-ticket-details-content-container">
+    <div class="ticketing-ticket-details-left-side">
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>home</mat-icon>
+          <span class="ticketing-sub-title">Details</span>
+        </h3>
+      </div>
+      <p>
+        {{ ticket.description }}
       </p>
 
-    <h2 class="ticketing-ticket-details-sub-title">History</h2>
-    <p *ngFor="let status of ticket.history">
-      <span>{{ status.label }} </span
-      ><span class="ticketing-ticket-details-history-date">
-        {{ status.date | date }}</span
-      >
-    </p>
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>people</mat-icon>
+          <span class="ticketing-sub-title">Working on</span>
+        </h3>
+      </div>
+      <p *ngIf="ticket.usersOnTask.length <= 0">
+        No user on task
+      </p>
+      <p *ngFor="let user of ticket.usersOnTask">
+        <span>{{ user.pseudo | titlecase }} </span>
+      </p>
 
-    <div *ngIf="flagDisplayTicketComment">
-      <h2 class="ticketing-ticket-details-sub-title">Comments</h2>
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>history</mat-icon>
+          <span class="ticketing-sub-title">History</span>
+        </h3>
+      </div>
+      <p *ngFor="let status of ticket.history">
+        <span>{{ status.label }} </span
+        ><span class="ticketing-ticket-details-history-date">
+          {{ status.date | date }}</span
+        >
+      </p>
+    </div>
+    <div
+      class="ticketing-ticket-details-comments-side"
+      *ngIf="flagDisplayTicketComment"
+    >
+      <div class="ticketing-sub-title-h3-container">
+        <h3 class="ticketing-ticket-details-sub-title">
+          <mat-icon>comment</mat-icon>
+          <span class="ticketing-sub-title">Comments</span>
+        </h3>
+      </div>
       <p
         class="ticketing-ticket-details-comments-container"
-        *ngFor="let status of ticket.commentsToDisplay"
+        *ngFor="let comment of ticket.commentsToDisplay"
       >
-        <span>{{ status.author }} </span
+        <span class="mat-body-2">{{ comment.author | titlecase }} </span
         ><span class="ticketing-ticket-details-comments-date">{{
-          status.creationDate | date
+          comment.creationDate | date
         }}</span
         ><br />
-        <span>{{ status.text }} </span>
+        <span>{{ comment.text }} </span>
       </p>
-
-      <div class="ticketing-ticket-details-comment-input-container">
-        <mat-form-field class="ticketing-ticket-details-comment-inputfield" appearance="fill">
-          <mat-label>New comment</mat-label>
-          <textarea type="text" matInput placeholder="What's in your mind?" [(ngModel)]="commentInputText"></textarea>
-        </mat-form-field>
-        <button class="ticketing-ticket-details-comment-input-button" mat-raised-button color="primary" (click)="sendcomment()">Send</button>
-      </div>
-      
+      <app-add-comment-input
+        [entityComments]="ticket.commentsToDisplay"
+        [entityId]="ticket.id"
+        [entityType]="ticketEntity"
+      ></app-add-comment-input>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

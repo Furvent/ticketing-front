@@ -1,4 +1,5 @@
 <div class="ticketing-group-dashboard-container">
+  <app-header [flagDisplayButtonBackToGeneralDashboard]="true"></app-header>
   <mat-progress-bar
     *ngIf="isLoadingData"
     mode="indeterminate"
@@ -14,10 +15,10 @@
         (refresh)="refreshMyTickets()"
       ></app-all-tickets-list>
     </mat-tab>
-    <mat-tab label="My tickets">
-      <app-my-tickets-list></app-my-tickets-list>
+    <mat-tab label="Group discussion">
+      <app-group-comments></app-group-comments>
     </mat-tab>
-    <mat-tab label="Group options">
+    <mat-tab label="Group administration" *ngIf="isUserGroupAdmin">
       <app-admin-options (refresh)="refreshMyTickets()"></app-admin-options>
     </mat-tab>
   </mat-tab-group>

@@ -1,8 +1,18 @@
 .ticketing-all-tickets-main-container {
   margin: 0.5rem;
   display: flex;
+  flex-direction: column;
+}
+
+.ticketing-all-tickets-container {
+  display: flex;
   justify-content: space-around;
   text-align: center;
+}
+
+.ticketing-all-tickets-toggle {
+  margin-left: 0.25rem;
+  margin-bottom: 0.5rem
 }
 
 .ticketing-label-container {

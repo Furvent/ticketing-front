@@ -1,1 +1,13 @@
-<p>profile works!</p>
+<div class="ticketing-profile-container">
+    <header class="ticketing-header-profile"> 
+        <h1>Your profile</h1>
+    </header>
+    <div class="ticketing-profile-subcontainer">
+        <div class=ticketing-profile-items>
+            <label class="ticketing-profile-item"><span class="ticketing-profile-item-span">Pseudo: </span>{{userData.pseudo}}</label>
+            <label class="ticketing-profile-item"><span class="ticketing-profile-item-span">Login : </span>{{userData.username}}</label>
+        </div>
+        <button mat-flat-button color="accent" class="ticketing-profile-button" (click)="openEditProfileDialog(userData)">Edit profile</button>
+    </div>
+   
+</div>

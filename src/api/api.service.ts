@@ -9,10 +9,12 @@ import {
   NewGroup,
   NewTicket,
   NewUser,
+  PublicUser,
   TicketData,
   UpdatedTicket,
   UpdatedUser,
   UserData,
+  UserIdGroupIdForm,
 } from 'src/shared/definitions/common';
 
 @Injectable({
@@ -91,5 +93,16 @@ export class ApiService {
       `${this.apiTicketingURL}/comment/createGroup`,
       newComment
     );
+  }
+
+  public getAllUsersAppRequest() {
+    return this.httpClient.get<PublicUser[]>(`${this.apiTicketingURL}/private/user-group`);
+  }
+
+  public addUserOnGroupRequest(userIdGroupId: UserIdGroupIdForm) {
+    return this.httpClient.post(
+      `${this.apiTicketingURL}/private/user-group/add-user`,
+      userIdGroupId
+    )
   }
 }

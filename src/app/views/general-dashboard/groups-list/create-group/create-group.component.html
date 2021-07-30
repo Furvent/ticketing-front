@@ -1,11 +1,23 @@
-<h2 mat-dialog-title>Create a new group</h2>
+<div
+  class="ticketing-modal-background-color ticketing-create-group-main-container"
+>
+  <h2 class="mat-dialog-title">Create a new group</h2>
+  <div class="ticketing-create-group-content-container">
+    <mat-form-field class="ticketing-create-group-input">
+      <mat-label>Group's name</mat-label>
+      <input type="text" matInput [(ngModel)]="name" (keyup)="onEnter()" />
+    </mat-form-field>
 
-<mat-form-field class="" appearance="fill">
-  <mat-label>Group's name</mat-label>
-  <input type="text" matInput [(ngModel)]="name"/>
-</mat-form-field>
-
-<mat-dialog-actions class="ticketing-create-group-actions-container">
-  <button class="mat-raised-button" (click)="close()">Cancel</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Create</button>
-</mat-dialog-actions>
+    <div class="ticketing-create-group-actions-container">
+      <button mat-raised-button color="accent" (click)="close()">Cancel</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="save()"
+        [disabled]="flagDisableCreateGroup"
+      >
+        Create
+      </button>
+    </div>
+  </div>
+</div>
