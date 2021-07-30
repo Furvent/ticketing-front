@@ -17,8 +17,8 @@ import { UserService } from 'src/services/user/user.service';
         state('open', style({
           //height: 250
         })),
-        transition('closed => open', animate(800)),
-        transition('open => closed', animate(800)), 
+        transition('closed => open', animate(150)),
+        transition('open => closed', animate(150)), 
     ]),
     
 ]

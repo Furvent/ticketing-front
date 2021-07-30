@@ -12,9 +12,6 @@ import { MyTicketsListComponent } from './my-tickets-list/my-tickets-list.compon
   styleUrls: ['./group-dashboard.component.scss'],
 })
 export class GroupDashboardComponent implements OnInit {
-  @ViewChild(MyTicketsListComponent)
-  private myTicketsComponent!: MyTicketsListComponent;
-
   @ViewChild(AllTicketsListComponent)
   private allTicketscomponent!: AllTicketsListComponent;
 
@@ -56,7 +53,6 @@ export class GroupDashboardComponent implements OnInit {
 
   // Temporary, will change with Observable
   refreshMyTickets() {
-    this.myTicketsComponent.getMyTickets();
     this.allTicketscomponent.getTicketsAndSortedThem();
   }
 }
