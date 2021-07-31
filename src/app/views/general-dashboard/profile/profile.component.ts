@@ -43,10 +43,6 @@ export class ProfileComponent {
       ) {
         // Call service to update user
         this.updateProfile(data);
-      } else {
-        console.error(
-          'Problem when editing user data, data is undefined or empty'
-        );
       }
     });
   }
