@@ -16,14 +16,17 @@ import {
   UserData,
   UserIdGroupIdForm,
 } from 'src/shared/definitions/common';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  apiTicketingURL = 'http://localhost:8082/api';
+  apiTicketingURL: string;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.apiTicketingURL = environment.apiUrl;
+  }
 
   public createUserRequest(newUser: NewUser) {
     return this.httpClient.post<UserData>(
