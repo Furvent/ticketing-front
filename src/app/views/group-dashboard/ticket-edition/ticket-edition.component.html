@@ -1,43 +1,66 @@
-<div class="ticketing-ticket-edition-main-container ticketing-modal-background-color">
-  <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
-    <mat-label>Ticket's title</mat-label>
-    <input type="text" matInput [(ngModel)]="ticket.title" (keyup)="checkFlagDisableModif()"/>
-  </mat-form-field>
-  <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
-    <mat-label>Ticket's description</mat-label>
-    <textarea matInput [(ngModel)]="ticket.description" (keyup)="checkFlagDisableModif()"></textarea>
-  </mat-form-field>
-  <div>
-    <h3>Add user(s) on task</h3>
-    <mat-form-field appearance="fill" class="ticketing-ticket-edition-input">
-      <mat-label>Users available</mat-label>
-      <mat-select [formControl]="pseudosSelected" multiple>
-        <mat-option
-          *ngFor="let pseudo of groupUserPseudoSelectOptions"
-          [value]="pseudo"
-          >{{ pseudo }}</mat-option
-        >
-      </mat-select>
+<div
+  class="
+    ticketing-ticket-edition-main-container ticketing-modal-background-color
+  "
+>
+  <h2 class="mat-dialog-title"><span *ngIf="isNewTicket">New Ticket</span><span *ngIf="!isNewTicket">Update Ticket</span></h2>
+  <div class="ticket-edition-items-container">
+    <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
+      <mat-label>Ticket's title</mat-label>
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="ticket.title"
+        (keyup)="checkFlagDisableModif()"
+      />
     </mat-form-field>
-  </div>
-  <div *ngIf="!isNewTicket">
-    <h3>Change status</h3>
-    <mat-radio-group
-      aria-labelledby="example-radio-group-label"
-      class="ticketing-ticket-edition-radio-group"
-      [(ngModel)]="selectedStatus"
-    >
-      <mat-radio-button
-        class="ticketing-ticket-edition-radio-button"
-        *ngFor="let status of selectableStatus"
-        [value]="status"
+    <mat-form-field class="ticketing-ticket-edition-input" appearance="fill">
+      <mat-label>Ticket's description</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="ticket.description"
+        (keyup)="checkFlagDisableModif()"
+      ></textarea>
+    </mat-form-field>
+    <div>
+      <h3>Add user(s) on task</h3>
+      <mat-form-field appearance="fill" class="ticketing-ticket-edition-input">
+        <mat-label>Users available</mat-label>
+        <mat-select [formControl]="pseudosSelected" multiple>
+          <mat-option
+            *ngFor="let pseudo of groupUserPseudoSelectOptions"
+            [value]="pseudo"
+            >{{ pseudo }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!isNewTicket">
+      <h3>Change status</h3>
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="ticketing-ticket-edition-radio-group"
+        [(ngModel)]="selectedStatus"
       >
-        {{ status }}
-      </mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div class="ticket-ticket-edition-buttons-container">
-    <button mat-raised-button color="primary" (click)="submit()" [disabled]="flagDisableModif">Submit</button>
-    <button mat-raised-button color="warn" (click)="goBack()">Go back</button>
+        <mat-radio-button
+          class="ticketing-ticket-edition-radio-button"
+          *ngFor="let status of selectableStatus"
+          [value]="status"
+        >
+          {{ status }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="ticket-ticket-edition-buttons-container">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="submit()"
+        [disabled]="flagDisableModif"
+      >
+        Submit
+      </button>
+      <button mat-raised-button color="warn" (click)="goBack()">Go back</button>
+    </div>
   </div>
 </div>

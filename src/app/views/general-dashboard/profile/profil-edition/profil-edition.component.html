@@ -1,33 +1,50 @@
-<div class="ticketing-profile-edition-container">
-    <header class="ticketing-header-profile-edition"> 
-        <h2>Edit your profile</h2>
-    </header>
+<div
+  class="ticketing-profile-edition-container ticketing-modal-background-color"
+>
+  <h2 class="mat-dialog-title">Edit your profile</h2>
 
-    <div class=ticketing-profile-edition-items>
+  <div class="ticketing-profile-edition-items">
+    <mat-form-field class="ticketing-profile-update" appearance="fill">
+      <mat-label>Public pseudo</mat-label>
+      <input
+        matInput
+        placeholder="The one by which you will be known to others"
+        [(ngModel)]="data.newPseudo"
+        (keyup)="onEnter()"
+      />
+    </mat-form-field>
 
-        <mat-form-field class="ticketing-profile-update" appearance="fill">
-            <mat-label>Update your pseudo</mat-label>
-            <input matInput placeholder="Connected name" [(ngModel)]="data.newPseudo" (keyup)="onEnter()" />
-            <mat-hint>The one by which you will be known to others</mat-hint>
-        </mat-form-field>
+    <mat-form-field class="ticketing-profile-update" appearance="fill">
+      <mat-label>Update your password</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Your new password"
+        [(ngModel)]="data.newPassword"
+        (keyup)="onEnter()"
+      />
+    </mat-form-field>
 
-        <mat-form-field class="ticketing-profile-update" appearance="fill">
-            <mat-label>Update your password</mat-label>
-            <input matInput type="password" placeholder="Your new password" [(ngModel)]="data.newPassword" (keyup)="onEnter()" />
-            <mat-hint>The one you use on the platform!</mat-hint>
-        </mat-form-field>
-        
-        <mat-form-field class="ticketing-profile-update" appearance="fill">
-            <mat-label>Insert your previous password</mat-label>
-            <input matInput type="password" placeholder="Your previous password" [(ngModel)]="data.oldPassword" (keyup)="onEnter()" />
-            <mat-hint>The one you are replacing</mat-hint>
-        </mat-form-field>
-
-
-    </div>
-    <div class="profile-edition-buttons-container">
-        <button mat-raised-button color="primary" (click)="submit()" [disabled]="flagDisableSignIn">Submit</button>
-        <button mat-raised-button color="accent" (click)="goBack()">Go back</button>
-      </div>
-
+    <mat-form-field class="ticketing-profile-update" appearance="fill">
+      <mat-label>Insert your previous password</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Your previous password"
+        [(ngModel)]="data.oldPassword"
+        (keyup)="onEnter()"
+      />
+    </mat-form-field>
+  </div>
+  <div class="profile-edition-buttons-container">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      [disabled]="flagDisableSignIn"
+    >
+      Submit
+    </button>
+    <button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+  </div>
 </div>

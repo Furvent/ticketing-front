@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { GroupDashboardService } from 'src/services/group-dashboard/group-dashboard.service';
 import { UserService } from 'src/services/user/user.service';
@@ -9,68 +9,51 @@ import { ProfilEditionComponent } from './profil-edition/profil-edition.componen
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit {
-
+export class ProfileComponent {
   @Output() refresh = new EventEmitter();
   public userData;
-  public updatedUser : UpdatedUser;
 
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
     private groupService: GroupDashboardService
-    ) {
-      this.userData = userService.getUserData();
-      this.updatedUser = {
-        username : this.userData.username,
-        newPassword : "",
-        oldPassword : "",
-        newPseudo :  ""
-      };
-     }
-
-  ngOnInit(): void {
+  ) {
+    this.userData = userService.getUserData();
   }
 
-      //To do get data User from user service
+  openEditProfileDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true; // To put autofocus on first input field
+    const updatedUser: UpdatedUser = {
+      username: this.userData.username,
+      newPassword: '',
+      oldPassword: '',
+      newPseudo: this.userData.pseudo,
+    };
+    dialogConfig.data = updatedUser;
+    const dialogRef = this.dialog.open(ProfilEditionComponent, dialogConfig);
 
-      //present the users data
-
-      //put a button that calls a Modal (check Matthieu)
-
-      //that Modal should open a new window that containss the profile edition component.
-
-      openEditProfileDialog(userData: UserData) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true; // To put autofocus on first input field
-        dialogConfig.data = this.updatedUser;
-        const dialogRef = this.dialog.open(ProfilEditionComponent, dialogConfig);
-        
-        dialogRef.afterClosed().subscribe((data: UpdatedUser) => {
-          if ((data !== undefined && data.newPseudo !=="") || (data !== undefined && data.oldPassword !=="")) {
-            // Call service to update user
-            this.updateProfile(data);
-          } else {
-            console.log("Hell no it didn't work")
-          }
-        });
-
+    dialogRef.afterClosed().subscribe((data: UpdatedUser) => {
+      if (
+        (data !== undefined && data.newPseudo !== '') ||
+        (data !== undefined && data.oldPassword !== '')
+      ) {
+        // Call service to update user
+        this.updateProfile(data);
+      } else {
+        console.error(
+          'Problem when editing user data, data is undefined or empty'
+        );
       }
+    });
+  }
 
-      updateProfile(updatedUser: UpdatedUser){
-        this.userService.updateUser(updatedUser).then(() => {
-          this.userData = this.userService.getUserData();
-          /*
-          this.groupService
-          .fetchGroupDashboardData(this.groupIdSelected)
-          .then(() => {
-            this.allTickets = this.groupService.getAllTickets();
-            this.sortTicketsByLastStatus();
-            this.refresh.emit();
-          });*/
-      });
-      }
+  updateProfile(updatedUser: UpdatedUser) {
+    this.userService.updateUser(updatedUser).then(() => {
+      this.userData = this.userService.getUserData();
+    });
+  }
 }
